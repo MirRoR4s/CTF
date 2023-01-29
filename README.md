@@ -1,3 +1,3 @@
-# my_Write_Up-about-CTF
-写给自己看，顺便练习一下github的操作。
+# CTF
+我的CTF仓库
 
