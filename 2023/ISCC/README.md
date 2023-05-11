@@ -81,7 +81,7 @@ if (isset($_GET["iscc"])) {
 
 然后调用的是
 
-```
+```php
 $var = $this->$name;
 $var[$name]();
 ```
@@ -92,7 +92,7 @@ $name 传进来是 “string”
 
 
 
-```
+```php
 <?php
 
 class boy {
@@ -178,5 +178,231 @@ $ans = urlencode(serialize($boy1));
 var_dump($ans);
 
 
+```
+
+### 小周的密码锁
+
+传参 password=4&password=5 拿到源码。
+
+```php
+<?php
+    function MyHashCode($str)
+    {
+        $h = 0;
+        $len = strlen($str);
+        for ($i = 0; $i < $len; $i++) {
+            $hash = intval40(intval40(40 * $hash) + ord($str[$i]));
+        }
+        return abs($hash);
+    }
+    
+    function intval40($code)
+    {
+        $falg = $code >> 32;
+        if ($falg == 1) {
+            $code = ~($code - 1);
+            return $code * -1;
+        } else {
+            return $code;
+        }
+    }
+    function Checked($str){
+        $p1 = '/ISCC/';
+        if (preg_match($p1, $str)){
+            return false;
+        }
+        return true;
+    }
+
+    function SecurityCheck($sha1,$sha2,$user){
+        
+        $p1 = '/^[a-z]+$/';
+        $p2 = '/^[A-Z]+$/';
+
+        if (preg_match($p1, $sha1) && preg_match($p2, $sha2)){
+            $sha1 = strtoupper($sha1);
+            $sha2 = strtolower($sha2);
+            $user = strtoupper($user);
+            $crypto = $sha1 ^ $sha2;
+        }
+        else{
+            die("wrong");
+        }       
+
+        return array($crypto, $user);
+    }
+    error_reporting(0);
+    
+    $user = $_GET['username'];//user
+    $sha1 = $_GET['sha1'];//sha1
+    $sha2 = $_GET['‮⁦//sha2⁩⁦sha2'];
+    //‮⁦see me ⁩⁦can you 
+
+    if (isset ($_GET['password'])) {
+        if ($_GET['password2'] == 5){
+            show_source(__FILE__);
+        }
+        else{
+            //Try to encrypt
+            if(isset($sha1) && isset($sha2) && isset($user)){
+                [$crypto, $user] = SecurityCheck($sha1,$sha2,$user);
+                if((substr(sha1($crypto),-6,6) === substr(sha1($user),-6,6)) && (substr(sha1($user),-6,6)) === 'a05c53'){//welcome to ISCC
+                    
+                    if((MyHashcode("ISCCNOTHARD") === MyHashcode($_GET['password']))&&Checked($_GET['password'])){
+                        include("f1ag.php");
+                        echo $flag;
+                    }else{
+                        die("就快解开了!");
+                    }
+                    
+                }
+                else{
+                    die("真的想不起来密码了吗?");
+                }
+            }else{
+                die("密钥错误!");
+            }
+        }    
+    }        
+
+    mt_srand((microtime() ^ rand(1, 10000)) % rand(1, 1e4) + rand(1, 1e4));
+?>
+```
+
+
+
+拿到 flag 的条件有两个：
+
+1. MyHashcode("ISCCNOTHARD") === MyHashcode($_GET['password'])
+2. Checked($_GET['password'])
+3. (substr(sha1(\$crypto),-6,6) === substr(sha1(\$user),-6,6)
+4. (substr(sha1(\$user),-6,6)) === 'a05c53')
+
+
+
+#### 前两个条件的分析
+
+
+
+分析一下 MyHashcode 函数：
+
+```php
+function MyHashCode($str)
+    {
+        $h = 0;
+        $len = strlen($str);
+        for ($i = 0; $i < $len; $i++) {
+            $hash = intval40(intval40(40 * $hash) + ord($str[$i]));
+        }
+        return abs($hash);
+    }
+function intval40($code)
+    {
+        $falg = $code >> 32;
+        if ($falg == 1) {
+            $code = ~($code - 1);                                                                                                                         
+            return $code * -1;
+        } else {
+            return $code;
+        }
+    }
+```
+
+
+
+再看看 Checked 函数：
+
+```php
+function Checked($str){
+        $p1 = '/ISCC/';
+        if (preg_match($p1, $str)){
+            return false;
+        }
+        return true;
+    }
+```
+
+为了通过 Checked 函数，传入的 password 不可以以 ISCC 开头，我们试着爆破一下验证码：
+
+没爆破出来，我只能仔细分析一下相关函数，经过我的分析发现如下几个重要的特点：
+
+1. intval40 函数对哈希值不起任何作用，所以在求哈希和的过程中可以直接略去该函数。
+2. 最后的哈希和可以写成如下形式：
+
+$h_i=40^{i-1}m_0+40^{i-2}m_1+....+40^{1}m_{i-2}+40^{0}m_{i-1}$
+
+这可以给我们一个启发：
+
+若我们保持 ISCCNOTHARD 除最高两位不同外其余位都相同，此时若可以找到两个字符 x 和 y，使得
+
+$40^{10}x+40^{9}y=40^{10}*ord(I)+40^{9}*ord(S)$
+
+那么我们就成功找到了一组哈希碰撞。下面简单地用 python 脚本试试
+
+
+
+```python
+sum = 40**10 * ord("I") + 40**9 * ord("S")
+for x in range(128):
+    for y in range(128):
+        if (40**10 * x + 40**9 * y == sum):
+            print(x,y)
+            print(chr(x),chr(y))
+72 123
+H {
+73 83
+I S
+74 43
+J +
+75 3
+K 
+```
+
+验证一下果然为 ture：
+
+```php
+$target = MyHashcode("ISCCNOTHARD");
+$test = MyHashCode("H{CCNOTHARD");
+var_dump($target == $test); # True
+```
+
+#### 后两个条件的分析：
+
+1. (substr(sha1(\$crypto),-6,6) === substr(sha1(\$user),-6,6)
+2. (substr(sha1(\$user),-6,6)) === 'a05c53')
+
+crypto 和 user 来自 SecurityCheck 函数：
+
+```php
+[$crypto, $user] = SecurityCheck($sha1,$sha2,$user);
+
+function SecurityCheck($sha1,$sha2,$user){
+
+    $p1 = '/^[a-z]+$/';
+    $p2 = '/^[A-Z]+$/';
+    
+    if (preg_match($p1, $sha1) && preg_match($p2, $sha2)){
+        $sha1 = strtoupper($sha1);
+        $sha2 = strtolower($sha2);
+        $user = strtoupper($user);
+        $crypto = $sha1 ^ $sha2;
+    }
+    else{
+        die("wrong");
+    }
+
+    return array($crypto, $user);
+}
+```
+
+
+
+```php
+for($i=-99999;$i=99999;$i++){
+$tmp = substr(sha1($i),-6,6);
+if($tmp == 'a05c53'){
+    var_dump($i);
+}
+}
 ```
 
