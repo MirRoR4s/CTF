@@ -2,7 +2,7 @@
 description: https://hackmd.io/@lamchcl/r1zQkbvpj
 ---
 
-# LACTF
+# LA CTF
 
 ### 前言
 
@@ -109,8 +109,6 @@ Site: uuid-hell.lac.tf
 
 整体逻辑很简单，就是从 Cookie 处获取 id，如果是管理员 id 就发送 flag。
 
-![](https://i.imgur.com/QAkEAaJ.png)
-
 getUser() 函数会输出 管理员和普通用户的 uuid 哈希值，createadmin() 函数可以创建一个管理员 uuid。
 
 获取 flag 的思路如下：
@@ -133,6 +131,10 @@ getUser() 函数会输出 管理员和普通用户的 uuid 哈希值，createadm
 当然，以下 wp 的思路是更加巧妙的。访问一次主页创建一个 uuid，然后访问 /flag 创建一个 管理员 uuid，之后再次访问主页创建一个 uuid。 所以 /flag 处创建的 uuid 其时间戳必定位于 两次主页的 uuid 之间。
 
 我们笃定这三个 uuid 对应的时间戳只在 time\_low 部分有不同，因为相隔的时间特别短暂。
+
+![](../.gitbook/assets/image.png)
+
+12小时的磕磕绊绊，终归是完全靠自己写出来了这个题。
 
 **exp**
 

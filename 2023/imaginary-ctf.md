@@ -2,7 +2,7 @@
 description: https://2023.imaginaryctf.org/Challenges
 ---
 
-# ImaginaryCTF
+# Imaginary CTF
 
 ### Crypto
 
@@ -100,7 +100,7 @@ print(bytes.fromhex(m).decode('utf-8'))
 
 #### signer
 
-![](../.gitbook/assets/image.png)
+![](<../.gitbook/assets/image (1).png>)
 
 考点：
 
