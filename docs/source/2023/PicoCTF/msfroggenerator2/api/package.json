@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "fastify": "^4.13.0",
-    "nanoid": "^4.0.1"
-  },
-  "type": "module"
-}

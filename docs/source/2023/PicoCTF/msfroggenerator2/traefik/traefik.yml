@@ -1,6 +1,0 @@
-providers:
-  file:
-    filename: /etc/traefik/web.yml
-entryPoints:
-  web:
-    address: ":8080"
