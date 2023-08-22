@@ -1,5 +1,0 @@
-题目名称：MyErrorLearnTwice
-题目内容：Cross my XennyOracle again.
-题目分值：已答出3次，初始分值500.0，当前分值499.9，解出分值499.78
-题目难度：困难
-相关附件：MyErrorLearnTwice的附件.zip

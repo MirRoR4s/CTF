@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Imaginary CTF &mdash; CTF 0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=44496db0"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            CTF
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">CTF</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lexington-Informatics-Tournament.html">Lexington Informatics Tournament CTF 2023</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CTF</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Imaginary CTF</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/source/2023/imaginary-ctf.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="imaginary-ctf">
+<h1>Imaginary CTF<a class="headerlink" href="#imaginary-ctf" title="Permalink to this heading"></a></h1>
+<section id="crypto">
+<h2>Crypto<a class="headerlink" href="#crypto" title="Permalink to this heading"></a></h2>
+<section id="rsa">
+<h3>rsa<a class="headerlink" href="#rsa" title="Permalink to this heading"></a></h3>
+<p>考点：</p>
+<ol class="arabic simple">
+<li><p>了解rsa加解密原理，了解rsa公私钥的组成。</p></li>
+<li><p>了解如何打开pem和enc文件，并知晓如何解密enc。</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Crypto.PublicKey</span> <span class="kn">import</span> <span class="n">RSA</span>
+<span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">bytes_to_long</span><span class="p">,</span> <span class="n">long_to_bytes</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;private.pem&quot;</span><span class="p">,</span><span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">key_file</span><span class="p">:</span>
+    <span class="n">prik</span> <span class="o">=</span> <span class="n">RSA</span><span class="o">.</span><span class="n">import_key</span><span class="p">(</span><span class="n">key_file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;public.pem&quot;</span><span class="p">,</span><span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">key_file</span><span class="p">:</span>
+    <span class="n">pubk</span> <span class="o">=</span> <span class="n">RSA</span><span class="o">.</span><span class="n">import_key</span><span class="p">(</span><span class="n">key_file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;flag.enc&quot;</span><span class="p">,</span><span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">c_file</span><span class="p">:</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">bytes_to_long</span><span class="p">(</span><span class="n">c_file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+<span class="n">n</span><span class="p">,</span><span class="n">d</span><span class="o">=</span><span class="n">pubk</span><span class="o">.</span><span class="n">n</span><span class="p">,</span><span class="n">prik</span><span class="o">.</span><span class="n">d</span>
+<span class="n">m</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">long_to_bytes</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>emoticons</strong> </p>
+<p><strong>考点：</strong></p>
+<ol class="arabic simple">
+<li><p><strong>知晓替换密码的概念、原理、性质。</strong></p></li>
+<li><p><strong>熟悉针对替换密码的频率分析攻击，并可以实践。</strong></p></li>
+</ol>
+<p>典型的替换密码，原文应该是英文文本串，但是题目把它变成了十六进制字符串，然后用emojis一一替换这些十六进制字符。</p>
+<p>可以用频率分析法破解这个替换密码。可以这么去考虑：密文中的emojis字符出现的频率和原文十六进制字符出现的频率是一致的。我们可以预估出原文中各个十六进制字符出现的频率，然后将这个频率和密文emojis字符的频率进行对应并进行替换。不过可惜的是，这样求出来的结果最后误差会有些大，但是通过<a class="reference external" href="https://www.quipqiup.com/">qiupquip</a>可以帮我们修正一下。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">binascii</span> <span class="kn">import</span> <span class="n">hexlify</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;out.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">sorted_freqs</span> <span class="o">=</span> <span class="p">[</span><span class="mf">18.28846265</span><span class="p">,</span> <span class="mf">10.26665037</span><span class="p">,</span> <span class="mf">7.51699827</span><span class="p">,</span> <span class="mf">6.53216702</span><span class="p">,</span> <span class="mf">6.15957725</span><span class="p">,</span> <span class="mf">5.71201113</span><span class="p">,</span> <span class="mf">5.66844326</span><span class="p">,</span> <span class="mf">5.31700534</span><span class="p">,</span> <span class="mf">4.98790855</span><span class="p">,</span> <span class="mf">4.97856396</span><span class="p">,</span> <span class="mf">3.31754796</span><span class="p">,</span> <span class="mf">3.28292310</span><span class="p">,</span> <span class="mf">2.27579536</span><span class="p">,</span> <span class="mf">2.23367596</span><span class="p">,</span> <span class="mf">2.02656783</span><span class="p">,</span> <span class="mf">1.98306716</span><span class="p">,</span> <span class="mf">1.70389377</span><span class="p">,</span> <span class="mf">1.62490441</span><span class="p">,</span> <span class="mf">1.50432428</span><span class="p">,</span> <span class="mf">1.42766662</span><span class="p">,</span> <span class="mf">1.25888074</span><span class="p">,</span> <span class="mf">0.79611644</span><span class="p">,</span> <span class="mf">0.56096272</span><span class="p">,</span> <span class="mf">0.14092016</span><span class="p">,</span> <span class="mf">0.09752181</span><span class="p">,</span> <span class="mf">0.08367550</span><span class="p">,</span> <span class="mf">0.05128469</span><span class="p">]</span>
+<span class="n">sorted_chars</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;u&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]</span>
+<span class="n">num_chars</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">hex_freqs</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">msg_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+
+
+<span class="n">test_hex_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="k">for</span> <span class="n">freq</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sorted_freqs</span><span class="p">,</span> <span class="n">sorted_chars</span><span class="p">):</span> <span class="c1"># 计算每个字符在加密消息中的预估出现次数。</span>
+    <span class="n">num_chars</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">msg_len</span> <span class="o">*</span> <span class="p">(</span><span class="n">freq</span> <span class="o">/</span> <span class="mf">100.0</span><span class="p">))</span>
+    <span class="n">test_hex_str</span> <span class="o">+=</span> <span class="n">num_chars</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="o">*</span> <span class="n">hexlify</span><span class="p">(</span><span class="n">char</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">est_freqs</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">test_hex_str</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">est_freqs</span><span class="p">:</span>
+        <span class="n">est_freqs</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">est_freqs</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="c1"># Sort the dictionary by values</span>
+<span class="c1"># Then, extract the sorted keys and values into separate lists</span>
+<span class="n">sorted_est_freqs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">est_freqs</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">sorted_est_keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sorted_est_freqs</span><span class="p">]</span>
+<span class="n">sorted_est_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sorted_est_freqs</span><span class="p">]</span>
+
+<span class="n">act_freqs</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">act_freqs</span><span class="p">:</span>
+        <span class="n">act_freqs</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">act_freqs</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="c1"># Sort the dictionary by values</span>
+<span class="c1"># Then, extract the sorted keys and values into separate lists</span>
+<span class="n">sorted_act_freqs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">act_freqs</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">sorted_act_keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sorted_act_freqs</span><span class="p">]</span>
+<span class="n">sorted_act_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sorted_act_freqs</span><span class="p">]</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">line</span>
+<span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sorted_act_keys</span><span class="p">,</span> <span class="n">sorted_est_keys</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="signer">
+<h3>signer<a class="headerlink" href="#signer" title="Permalink to this heading"></a></h3>
+<p><img alt="" src="source/.gitbook/assets/image%20(1).png" /></p>
+<p>考点：</p>
+<ol class="arabic simple">
+<li><p>熟悉<a class="reference external" href="https://ceng2.ktu.edu.tr/~cevhers/ders_materyal/bil311_bilgisayar_mimarisi/supplementary_docs/crc_algorithms.pdf">CRC32</a>的原理与概念，知晓如何求CRC32的逆。</p></li>
+<li><p>知晓模乘可结合的性质。</p></li>
+<li><p>知道应将PASSWORD的CRC32值拆分。</p></li>
+</ol>
+<p>更加具体的解题思路可以参看此处：<a class="reference external" href="https://meashiri.github.io/ctf-writeups/posts/202307-imaginaryctf/">https://meashiri.github.io/ctf-writeups/posts/202307-imaginaryctf/</a></p>
+<p>{% file src=”../.gitbook/assets/crc_algorithms.pdf” %}</p>
+<p><strong>Tan</strong></p>
+<p>Description</p>
+<p><code class="docutils literal notranslate"><span class="pre">tan(x)</span></code> is a broken hash function in terms of collision resistance and second preimage resistance. But you surely can’t find the preimage of <code class="docutils literal notranslate"><span class="pre">tan(flag)</span></code>, right?</p>
+<p>{% file src=”../.gitbook/assets/tan.sage” %}</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, MirRoR4s.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

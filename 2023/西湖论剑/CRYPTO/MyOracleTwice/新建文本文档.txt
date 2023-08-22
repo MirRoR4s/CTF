@@ -1,5 +1,0 @@
-题目名称：MyOracleTwice
-题目内容：Contact XennyOracle again.
-题目分值：已答出0次，初始分值500.0，当前分值500.0，解出分值500.0
-题目难度：困难
-相关附件：MyOracleTwice的附件.zip

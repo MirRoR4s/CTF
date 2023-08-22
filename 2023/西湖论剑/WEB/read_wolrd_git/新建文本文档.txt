@@ -1,9 +1,0 @@
-题目名称：real world git
-题目内容：源码大盗
-题目分值：已答出13次，初始分值500.0，当前分值496.54，解出分值495.94
-题目难度：容易
-靶机管理
-靶机管理地址：
-http://80.endpoint-8c005ee6862645169cf4da3fdc854c2a.m.ins.cloud.dasctf.com:81/dasctf_admin_portal
-IP信息：
-http/80->http://80.endpoint-8c005ee6862645169cf4da3fdc854c2a.m.ins.cloud.dasctf.com:81
