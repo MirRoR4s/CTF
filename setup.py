@@ -31,12 +31,11 @@ setup(
     name="CTF",
     version="0.1.0",
     description="My CTF's Study Record",
-    long_description=get_long_description(),
     long_description_content_type="text/x-rst",
     maintainer="Joshua Pereyda",
     maintainer_email="joshua.t.pereyda@gmail.com",
     url="https://github.com/MirRoR4s/CTF.git",
-    packages=find_packages(exclude=["docs",]),
+    packages=find_packages(exclude=["docs"]),
     install_requires=[
         "attrs",
         "click",
