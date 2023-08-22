@@ -9,28 +9,6 @@ from setuptools import find_packages, setup
 setup_dir = os.path.abspath(os.path.dirname(__file__))
 
 
-def find_version(*path_elements):
-    """Search a file for `__version__ = 'version number'` and return version.
-
-    @param path_elements: Arguments specifying file to search.
-
-    @return: Version number string.
-    """
-    path = os.path.join(setup_dir, *path_elements)
-    for line in open(path):
-        for match in re.finditer(r"__version__\s*=\s(.*)$", line):
-            return ast.literal_eval(match.group(1))
-    raise RuntimeError("version string not found in {0}".format(path))
-
-
-def get_long_description():
-    descr = []
-    for fname in "README.rst", "CHANGELOG.rst":
-        with open(os.path.join(setup_dir, fname), encoding="utf-8") as f:
-            descr.append(f.read())
-    return "\n\n".join(descr)
-
-
 extra_requirements = {
     "dev": [
         "black",
@@ -45,21 +23,20 @@ extra_requirements = {
         "ipaddress",
         "wheel",
     ],
-    "docs": ["sphinx", "sphinx_rtd_theme", "pygments>=2.4.0"],
+    "docs": ["sphinx", "sphinx_rtd_theme", "pygments>=2.4.0","myst-parser"],
 }
 extra_requirements["dev"] += extra_requirements["docs"]
 
 setup(
-    name="boofuzz",
-    version=find_version("boofuzz", "__init__.py"),
-    description="A fork and successor of the Sulley Fuzzing Framework",
+    name="CTF",
+    version="0.1.0",
+    description="My CTF's Study Record",
     long_description=get_long_description(),
     long_description_content_type="text/x-rst",
     maintainer="Joshua Pereyda",
     maintainer_email="joshua.t.pereyda@gmail.com",
-    url="https://github.com/jtpereyda/boofuzz",
-    packages=find_packages(exclude=["docs", "examples", "request_definitions", "unit_tests", "utils"]),
-    package_data={"boofuzz.web": ["static/*", "static/*/*", "templates/*", "templates/*/*"]},
+    url="https://github.com/MirRoR4s/CTF.git",
+    packages=find_packages(exclude=["docs",]),
     install_requires=[
         "attrs",
         "click",
@@ -75,7 +52,6 @@ setup(
     ],
     extras_require=extra_requirements,
     python_requires=">=3.6",
-    entry_points={"console_scripts": ["boo=boofuzz.cli:main"]},
     classifiers=[
         "Development Status :: 4 - Beta",
         "Environment :: Console",

@@ -12,6 +12,7 @@ Welcome to CTF's documentation!
    :caption: CTF
 
    source/2023/Lexington-Informatics-Tournament.md
+   source/2023/tamu.md
 
 
 
