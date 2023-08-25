@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="h">test</h1>
+    <script>
+        window.XMLHttpRequest.prototype.open = (...args) => {
+            fetch(args[1])
+                .then((res) => res.text())
+                .then(txt => document.getElementById("h").innerHTML = txt.replace(/(.{10})/g, '$1\n') + "**DONE**")
+
+            //document.getElementById("h").innerHTML = args[1].replace(/(.{10})/g, '$1\n') + "    done";
+        }
+        window.XMLHttpRequest.prototype.send = () => { }
+
+    </script>
+</body>
+
+</html>

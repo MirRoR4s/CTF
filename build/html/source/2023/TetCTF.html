@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TetCTF 2023 &mdash; CTF 0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=44496db0"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Lexington Informatics Tournament CTF 2023" href="Lexington-Informatics-Tournament.html" />
+    <link rel="prev" title="MirRoR4s’s CTF" href="../../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            CTF
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">CTF-2023</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">TetCTF 2023</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">前言</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#web">WEB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#newyearbot">NewYearBot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">题目分析</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#image-services-viewer">Image Services Viewer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">题目分析</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Lexington-Informatics-Tournament.html">Lexington Informatics Tournament CTF 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tamu.html">TAMUctf 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nullcon-HackIM-CTF-Goa.html">nullcon HackIM CTF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CTFZone.html">CTFZone</a></li>
+<li class="toctree-l1"><a class="reference internal" href="corCTF.html">corCTF 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tamu.html">TAMUctf 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nullcon-HackIM-CTF-Goa.html">nullcon HackIM CTF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CTFZone.html">CTFZone</a></li>
+<li class="toctree-l1"><a class="reference internal" href="corCTF.html">corCTF 2023</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CTF</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">TetCTF 2023</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/source/2023/TetCTF.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tetctf-2023">
+<h1>TetCTF 2023<a class="headerlink" href="#tetctf-2023" title="Permalink to this heading"></a></h1>
+<section id="id1">
+<h2>前言<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<p>每年过年越南似乎都会举办一场ctf比赛，这也是ctftime上2023年的第一场ctf比赛。</p>
+<p>源码：https://drive.google.com/file/d/13QLDDnauyMogu8RX-xLqB8jP-degF28d/view</p>
+</section>
+<section id="web">
+<h2>WEB<a class="headerlink" href="#web" title="Permalink to this heading"></a></h2>
+<section id="newyearbot">
+<h3>NewYearBot<a class="headerlink" href="#newyearbot" title="Permalink to this heading"></a></h3>
+<p><strong>题目描述</strong></p>
+<p><strong>Description</strong>
+New Year New Code! My friend decide to learn code in new year, here his very first website: http://172.105.120.180:9999/</p>
+<p><strong>File</strong>
+He said it is very secure because he is very strict on what user can input, can you check?
+https://drive.google.com/file/d/1tU18ePUAHHYpxJ9QhdVKBpuBm_eXy–r/view?usp=sharing</p>
+<p><strong>Note</strong>
+Don’t generate excessive load. Scanning/Dirbust is not needed.</p>
+<section id="id2">
+<h4>题目分析<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
+<p>这是一个传入type和number然后回显对应的问候语的应用。type用于选择特定的问候语列表，number选择列表中的元素。一番审计感觉应该是下面这个地方的代码有问题：</p>
+<p><img alt="image-20230825065628741" src="../../_images/image-20230825065628741.png" /></p>
+<p>对于传入的type仅做了一个变量名是否合法的校验，这里或许可能执行任意的函数，而非是题目期望的问候语列表。</p>
+<p>flag是在FL4G这个变量里面，所以很自然的想法就是显示该变量的内容。如果传入的type为FL4G，那么肯定希望number是对应的下标索引。但是number有一个botValidator函数过滤，该函数限制了number各个字符的ascii值不可以在57-123之内，并且数字部分总长度不可以超过最长的问候语列表的长度。（最大长度是 6）那么我们传入的 number 必须小于等于 5 。所以如何截取剩余的flag字符呢？我看到的有两种手法：</p>
+<p><strong>slice切片结合同型字符</strong></p>
+<p>python的 <a class="reference external" href="https://www.runoob.com/python/python-func-slice.html">slice</a></p>
+<p>我们只要得到一个截取很多个元素的切片 myslice，然后通过 FL4G[myslice] 不就可以截取出 flag 来了么？只要截取元素够多，就可以拿到完整的 flag。</p>
+<p>要调用 slice 函数，我们需要得到一个整数，在 python 下，id 函数用于获取对象的唯一标识符，而标识符是一个整数，所以我们可以通过 slice(id(对象)) 来得到一个元素切片。而这个对象我们有很多种选择，比如在题目源码中导入的几个模块 re、random等，不过长度尽量短，因为我们传入的 number 参数是有长度限制的。例如我们可以选择 <code class="docutils literal notranslate"><span class="pre">number=slice(id(re))</span></code></p>
+<p>但是还有一个很关键的问题，那就是题目不允许我们传入 ascii 码值在 57 和 123 之间的字符</p>
+<p>我们可以通过传入 <code class="docutils literal notranslate"><span class="pre">slice(id(re))</span></code> 的 <strong>unicode 同形字符</strong>来绕过这个限制，尽管说这些并不是 ascii 字符，但是 python 会自动 normalize 它们。<a class="reference external" href="https://www.freebuf.com/vuls/229446.html">同形字符</a> 𝔰𝔩𝔦𝔠𝔢(𝔦𝔡(𝔯𝔢))</p>
+<p><strong>位运算</strong></p>
+<p><a class="reference external" href="https://www.w3schools.com/python/gloss_python_bitwise_operators.asp">Python Bitwise Operators</a></p>
+<p><code class="docutils literal notranslate"><span class="pre">~</span></code> 是 python 中的 取反运算符。</p>
+<p><code class="docutils literal notranslate"><span class="pre">-~5</span></code> 会得到 <code class="docutils literal notranslate"><span class="pre">6</span></code> ，关于其底层原理，可以看这篇文章：<a class="reference external" href="https://zhuanlan.zhihu.com/p/261080329">取反运算符~详解</a>。而减号和波浪号是在允许的 ascii 码值范围内，所以我们可以通过这种手法拿到 flag 的第六个字符</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="o">=</span><span class="n">FL4G</span><span class="o">&amp;</span><span class="n">number</span><span class="o">=</span><span class="n">𝔰𝔩𝔦𝔠𝔢</span><span class="p">(</span><span class="n">𝔦𝔡</span><span class="p">(</span><span class="n">𝔯𝔢</span><span class="p">))</span> <span class="c1"># POST</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-~</span><span class="mi">0</span><span class="o">-~</span><span class="mi">4</span> <span class="o">-&gt;</span> <span class="mi">6</span>
+<span class="o">-~</span><span class="mi">0</span><span class="o">-~</span><span class="mi">5</span> <span class="o">-&gt;</span> <span class="mi">7</span>
+<span class="o">-~</span><span class="mi">0</span><span class="o">-~</span><span class="mi">0</span><span class="o">-~</span><span class="mi">5</span> <span class="o">-&gt;</span> <span class="mi">8</span>
+<span class="o">-~</span><span class="mi">0</span><span class="o">-~</span><span class="mi">0</span><span class="o">-~</span><span class="mi">0</span><span class="o">-~</span><span class="mi">5</span> <span class="o">-&gt;</span> <span class="mi">9</span>
+<span class="p">(</span><span class="o">-~</span><span class="mi">0</span><span class="o">-~</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span> <span class="o">-&gt;</span> <span class="mi">10</span>
+<span class="o">~</span><span class="mi">0</span><span class="o">-</span><span class="p">(</span><span class="o">-~</span><span class="mi">0</span><span class="o">-~</span><span class="mi">0</span><span class="p">)</span><span class="o">*~</span><span class="mi">5</span> <span class="o">-&gt;</span> <span class="mi">11</span>
+<span class="p">(</span><span class="o">-~</span><span class="mi">0</span><span class="o">-~</span><span class="mi">0</span><span class="o">-~</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">4</span> <span class="o">-&gt;</span> <span class="mi">12</span>
+<span class="o">~</span><span class="mi">0</span><span class="o">-</span><span class="p">(</span><span class="o">-~</span><span class="mi">0</span><span class="o">-~</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span> <span class="o">-&gt;</span> <span class="o">-</span><span class="mi">11</span>
+<span class="p">(</span><span class="o">-~</span><span class="mi">0</span><span class="o">-~</span><span class="mi">0</span><span class="p">)</span><span class="o">*~</span><span class="mi">4</span> <span class="o">-&gt;</span> <span class="o">-</span><span class="mi">10</span>
+<span class="o">~</span><span class="p">(</span><span class="o">-~</span><span class="mi">0</span><span class="o">-~</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span> <span class="o">-&gt;</span> <span class="o">-</span><span class="mi">9</span>
+<span class="p">(</span><span class="o">-~</span><span class="mi">0</span><span class="o">-~</span><span class="mi">0</span><span class="p">)</span><span class="o">*~</span><span class="mi">3</span> <span class="o">-&gt;</span> <span class="o">-</span><span class="mi">8</span>
+<span class="o">~</span><span class="mi">0</span><span class="o">--~</span><span class="mi">5</span> <span class="o">-&gt;</span> <span class="o">-</span><span class="mi">7</span>
+<span class="o">~</span><span class="mi">5</span> <span class="o">-&gt;</span> <span class="o">-</span><span class="mi">6</span>
+<span class="o">~</span><span class="mi">4</span> <span class="o">-&gt;</span> <span class="o">-</span><span class="mi">5</span>
+<span class="o">~</span><span class="mi">3</span> <span class="o">-&gt;</span> <span class="o">-</span><span class="mi">4</span>
+<span class="o">~</span><span class="mi">2</span> <span class="o">-&gt;</span> <span class="o">-</span><span class="mi">3</span>
+<span class="o">~</span><span class="mi">1</span> <span class="o">-&gt;</span> <span class="o">-</span><span class="mi">2</span>
+<span class="o">~</span><span class="mi">0</span> <span class="o">-&gt;</span> <span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="image-services-viewer">
+<h3>Image Services Viewer<a class="headerlink" href="#image-services-viewer" title="Permalink to this heading"></a></h3>
+<p><strong>题目描述</strong></p>
+<p>Do you know secret which on my server!!!!</p>
+<p>源码地址：https://drive.google.com/file/d/1K8XJXrdwEgJWGwu2V3cqLiZUo4nrdweM/view?usp=share_link</p>
+<section id="id3">
+<h4>题目分析<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../index.html" class="btn btn-neutral float-left" title="MirRoR4s’s CTF" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Lexington-Informatics-Tournament.html" class="btn btn-neutral float-right" title="Lexington Informatics Tournament CTF 2023" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, MirRoR4s.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

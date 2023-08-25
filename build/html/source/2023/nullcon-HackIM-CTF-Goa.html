@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nullcon HackIM CTF &mdash; CTF 0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=44496db0"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="TAMUctf 2023" href="tamu.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            CTF
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">CTF</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Lexington-Informatics-Tournament.html">Lexington Informatics Tournament CTF 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tamu.html">TAMUctf 2023</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">nullcon HackIM CTF</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#web">WEB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#debugger">Debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#typicalboss">TYPicalBoss</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">题目分析</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ipfilter">IPfilter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">题目分析</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#colorful">Colorful</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">题目分析</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#magic-cars">Magic Cars</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">题目分析</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#loginbytepass">Loginbytepass</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">题目分析</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CTF</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">nullcon HackIM CTF</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/source/2023/nullcon-HackIM-CTF-Goa.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nullcon-hackim-ctf">
+<h1>nullcon HackIM CTF<a class="headerlink" href="#nullcon-hackim-ctf" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="https://ctf.nullcon.net/challenges">nullcon HackIM CTF</a></p>
+<section id="web">
+<h2>WEB<a class="headerlink" href="#web" title="Permalink to this heading"></a></h2>
+<section id="debugger">
+<h3>Debugger<a class="headerlink" href="#debugger" title="Permalink to this heading"></a></h3>
+<p><strong>题目描述</strong></p>
+<p>My friend implemented their own PHP-Info-based debugger… and said that since only 127.0.0.1 can access it, we can ship it to production!</p>
+</section>
+<section id="typicalboss">
+<h3>TYPicalBoss<a class="headerlink" href="#typicalboss" title="Permalink to this heading"></a></h3>
+<p><strong>题目描述</strong></p>
+<p>My boss just implemented his first PHP website. He mentioned that he managed to calculate a hash that is equal to 0??? I suppose he is not very experienced in PHP yet.</p>
+<section id="id1">
+<h4>题目分析<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
+<p>访问 / 可以看到文件夹，然后下载出现的数据库文件。之后利用 python 读取一下该文件发现了几个用户的数据：</p>
+<p><img alt="image-20230823071508705" src="../../_images/image-20230823071508705.png" /></p>
+<p>不过我没想明白这一串十六进制的含义是什么。。一开始根据描述我也想到的是 php 的 md5 弱比较漏洞什么的，但是试了一个没成功就放弃了，后面发现应该尝试 sha1 的，我这里没有注意到哈希值的长度，所以没有判断出来不是 md5。具体的 payload 可以参看<a class="reference external" href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Type%20Juggling#magic-hashes">此处</a>。</p>
+</section>
+</section>
+<section id="ipfilter">
+<h3>IPfilter<a class="headerlink" href="#ipfilter" title="Permalink to this heading"></a></h3>
+<p><strong>题目描述</strong></p>
+<p>Let’s ensure that only the frontend can only contact servers from the backend network, except for the one server with all our secret data!</p>
+<section id="id2">
+<h4>题目分析<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+        <span class="nb">error_reporting</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="k">function</span> <span class="nf">fetch_backend</span><span class="p">(</span><span class="nv">$ip</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">is_bad_ip</span><span class="p">(</span><span class="nv">$ip</span><span class="p">))</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="s2">&quot;This IP is not allowed!&quot;</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="nb">file_get_contents</span><span class="p">(</span><span class="s2">&quot;http://&quot;</span><span class="o">.</span> <span class="nv">$ip</span> <span class="o">.</span> <span class="s2">&quot;/&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">function</span> <span class="nf">is_bad_ip</span><span class="p">(</span><span class="nv">$ip</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nb">preg_match</span><span class="p">(</span><span class="s1">&#39;/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/&#39;</span><span class="p">,</span> <span class="nv">$ip</span><span class="p">))</span> <span class="p">{</span>
+                <span class="c1">// IP must be in X.Y.Z.Q format</span>
+                <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="nv">$frontend</span> <span class="o">=</span> <span class="nb">gethostbyname</span><span class="p">(</span><span class="nb">gethostname</span><span class="p">());</span>
+            <span class="nv">$backend</span> <span class="o">=</span> <span class="nb">gethostbyname</span><span class="p">(</span><span class="s2">&quot;ipfilter_backend&quot;</span><span class="p">);</span>
+            <span class="nv">$subnet</span> <span class="o">=</span> <span class="nb">long2ip</span><span class="p">(</span><span class="nb">ip2long</span><span class="p">(</span><span class="nv">$frontend</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">ip2long</span><span class="p">(</span><span class="s2">&quot;255.255.255.0&quot;</span><span class="p">));</span>
+            <span class="nv">$bcast</span> <span class="o">=</span> <span class="nb">long2ip</span><span class="p">(</span><span class="nb">ip2long</span><span class="p">(</span><span class="nv">$frontend</span><span class="p">)</span> <span class="o">|</span> <span class="o">~</span><span class="nb">ip2long</span><span class="p">(</span><span class="s2">&quot;255.255.255.0&quot;</span><span class="p">));</span>
+
+            <span class="k">if</span><span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;debug_filter&#39;</span><span class="p">]))</span> <span class="p">{</span>
+                <span class="k">echo</span> <span class="s2">&quot;&lt;pre&gt;&quot;</span><span class="p">;</span>
+                <span class="k">echo</span> <span class="s2">&quot;IP: &quot;</span> <span class="o">.</span> <span class="nv">$ip</span> <span class="o">.</span> <span class="s2">&quot;&lt;br&gt;&quot;</span><span class="p">;</span>
+                <span class="k">echo</span> <span class="s2">&quot;Frontend: &quot;</span> <span class="o">.</span> <span class="nv">$frontend</span> <span class="o">.</span> <span class="s2">&quot;&lt;br&gt;&quot;</span><span class="p">;</span>
+                <span class="k">echo</span> <span class="s2">&quot;Backend: &quot;</span> <span class="o">.</span> <span class="nv">$backend</span> <span class="o">.</span> <span class="s2">&quot;&lt;br&gt;&quot;</span><span class="p">;</span>
+                <span class="k">echo</span> <span class="s2">&quot;Subnet:&quot;</span> <span class="o">.</span> <span class="nv">$subnet</span> <span class="o">.</span> <span class="s2">&quot;&lt;br&gt;&quot;</span><span class="p">;</span>
+                <span class="k">echo</span> <span class="s2">&quot;Broadcast:&quot;</span> <span class="o">.</span> <span class="nv">$bcast</span> <span class="o">.</span> <span class="s2">&quot;&lt;br&gt;&quot;</span><span class="p">;</span>
+                <span class="k">echo</span>  <span class="s2">&quot;&lt;/pre&gt;&quot;</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span><span class="p">(</span><span class="nb">inet_pton</span><span class="p">(</span><span class="nv">$ip</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span> <span class="nb">inet_pton</span><span class="p">(</span><span class="nv">$subnet</span><span class="p">))</span> <span class="p">{</span>
+                <span class="c1">// Do not go below the subnet!</span>
+                <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">!</span> <span class="p">(</span><span class="nb">inet_pton</span><span class="p">(</span><span class="nv">$ip</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">inet_pton</span><span class="p">(</span><span class="nv">$bcast</span><span class="p">)))</span> <span class="p">{</span>
+                <span class="c1">// Do not go above the subnet!</span>
+                <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">if</span><span class="p">(</span><span class="nv">$ip</span> <span class="o">==</span> <span class="nv">$backend</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// Do not allow the backend with our secrets ;-)</span>
+                <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;fetch_backend&#39;</span><span class="p">])</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="k">echo</span> <span class="nx">fetch_backend</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;bip&#39;</span><span class="p">]);</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;src&#39;</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="nb">highlight_file</span><span class="p">(</span><span class="no">__FILE__</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="c1">// with &lt;3 from @gehaxelt</span>
+    <span class="cp">?&gt;</span>
+</pre></div>
+</div>
+<p>如果通过了 ip 检查就可以 file_get_contents，这个函数不是文件包含就是 SSRF。要求访问后端的ip地址拿到 secret，但是又不允许我们直接输入后端地址。注意到它这个 ip 地址的比较是存在漏洞的，因为 192.168.100.2 和 192.168.100.02 是一样的。</p>
+<p><a class="reference external" href="https://gist.github.com/shinmai/b85b0befcb8f5871310be41efdfceea8#ipfilter">nullcon HackIM CTF Goa 2023 writeups (github.com)</a></p>
+</section>
+</section>
+<section id="colorful">
+<h3>Colorful<a class="headerlink" href="#colorful" title="Permalink to this heading"></a></h3>
+<p><strong>题目描述</strong></p>
+<p>The world is so colorful… but can you get the flag?</p>
+<section id="id3">
+<h4>题目分析<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
+<p>打开题目拿到下面的源码：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">secrets</span>
+<span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;secret&quot;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;secret&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">16</span><span class="p">))</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">secret_key</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;secret&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">SessionHandler</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span>
+
+    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span><span class="n">p</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_session</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">and</span> <span class="n">val</span><span class="p">:</span>
+            <span class="n">session</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_session</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">set_cookie</span><span class="p">(</span><span class="s2">&quot;session&quot;</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">session</span>
+
+    <span class="k">def</span> <span class="nf">set_session</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="n">c</span><span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">s</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">}</span><span class="s2">&amp;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_session</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_session</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">cookies</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;session&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">session</span><span class="p">:</span>
+            <span class="n">session</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_session</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d</span><span class="p">(</span><span class="n">session</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">d</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;&amp;&quot;</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+                    <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">=</span><span class="n">v</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+        <span class="k">return</span> <span class="n">d</span>
+
+    <span class="k">def</span> <span class="nf">new_session</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="n">secrets</span><span class="o">.</span><span class="n">token_hex</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;_id=</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">&amp;admin=0&amp;color=ffff00&amp;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_c</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+            <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">%</span> <span class="mi">16</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">v</span> <span class="o">+=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x41</span><span class="s1">&#39;</span> 
+            <span class="k">return</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">_d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="nb">bytearray</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">v</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">session_handler</span> <span class="o">=</span> <span class="n">SessionHandler</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">secret_key</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/color/&lt;color&gt;&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">change_color</span><span class="p">(</span><span class="n">color</span><span class="p">):</span>
+
+    <span class="nd">@after_this_request</span>
+    <span class="k">def</span> <span class="nf">sc</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">session_handler</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span><span class="s2">&quot;color&quot;</span><span class="p">,</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">response</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">session_handler</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;admin&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;FLAG&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="nd">@after_this_request</span>
+    <span class="k">def</span> <span class="nf">sc</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">session_handler</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">response</span>
+
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;h1&gt;The world is so colorful!&lt;/h1&gt;&lt;p&gt;Change your color at &lt;pre&gt;/color/$color&lt;/pre&gt; and return here.&lt;/p&gt;&lt;style&gt;html </span><span class="se">{{</span><span class="s2">background-color: #</span><span class="si">{</span><span class="n">color</span><span class="si">}</span><span class="se">}}</span><span class="s2">&lt;/style&gt;&lt;br&gt;&lt;pre&gt;</span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s2">&lt;/pre&gt;&quot;</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>从根路由可以知道需要 session[‘admin’]==1 才可以获得 flag，session 在 cookie 里面传过去。</p>
+<p>看了下session的更改只能改 color，咋获得 flag？
+<a class="reference external" href="https://github.com/Cooperw/ctf/blob/master/2023-08-20-nullcon/colorful/README.md">ctf/2023-08-20-nullcon/colorful/README.md at master · Cooperw/ctf (github.com)</a></p>
+<p>Create an additional AES-ECB block (<code class="docutils literal notranslate"><span class="pre">/color/1234&amp;in=1&amp;color=1234</span></code>) and replace the second one.</p>
+<p>没太搞懂这个题目，下回再看看。</p>
+</section>
+</section>
+<section id="magic-cars">
+<h3>Magic Cars<a class="headerlink" href="#magic-cars" title="Permalink to this heading"></a></h3>
+<p><strong>题目描述</strong></p>
+<p>Who doesn’t love Magical Cars? go checkout this cool website and even upload your fav gif to support it.</p>
+<section id="id4">
+<h4>题目分析<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h4>
+<p>一个 php 搭建的网站，看了下感觉是有限制的文件上传题目。唯一的难点可能就是后缀名得要是 gif 了，如何解决这个问题？</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$extension = strtolower(pathinfo($target_dir,PATHINFO_EXTENSION));
+</pre></div>
+</div>
+<p>冷知识来啦：pathinfo存在空字节截断漏洞，也就是说 xxx.php%00.jpg 会被 pathinfo 认为是 jpg 文件，但是实际上保存得时候文件后缀是 php，这就完成了截断！</p>
+<p>详情参看：<a class="reference external" href="https://xhacka.github.io/posts/writeup/2023/08/20/Magic-Cars/">Nullcon 2023 - Magic Cars | xHacka</a></p>
+</section>
+</section>
+<section id="loginbytepass">
+<h3>Loginbytepass<a class="headerlink" href="#loginbytepass" title="Permalink to this heading"></a></h3>
+<p><strong>题目描述</strong></p>
+<p>I wrote this ultra super secure login mechanism… but I heard rumors that my colleagues are still able to login as admin, although I ensured that SQL injection is impossible.</p>
+<section id="id5">
+<h4>题目分析<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h4>
+<p>post 加个 src 参数看到源码如下：</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+        <span class="nb">define</span><span class="p">(</span><span class="s2">&quot;LOADFLAG&quot;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+        <span class="nb">error_reporting</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="nv">$db</span> <span class="o">=</span> <span class="nb">mysqli_connect</span><span class="p">(</span><span class="s1">&#39;db&#39;</span><span class="p">,</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="s1">&#39;db&#39;</span><span class="p">);</span>
+
+        <span class="k">function</span> <span class="nf">list_users</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">global</span> <span class="nv">$db</span><span class="p">;</span>
+            <span class="k">echo</span> <span class="s2">&quot;&lt;h1&gt;Registered users:&lt;/h1&gt;&quot;</span><span class="p">;</span>
+            <span class="nv">$res</span> <span class="o">=</span> <span class="nx">mysqli_query</span><span class="p">(</span><span class="nv">$db</span><span class="p">,</span> <span class="s2">&quot;SELECT * FROM users&quot;</span><span class="p">);</span>
+            <span class="k">while</span><span class="p">(</span><span class="nv">$user</span> <span class="o">=</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="na">fetch_object</span><span class="p">())</span> <span class="p">{</span>
+                <span class="k">echo</span> <span class="s2">&quot;&lt;p&gt;&quot;</span><span class="p">;</span>
+                <span class="k">echo</span> <span class="s2">&quot;User: &quot;</span> <span class="o">.</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">username</span> <span class="o">.</span> <span class="s2">&quot; Password: &quot;</span> <span class="o">.</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">password</span><span class="p">;</span>
+                <span class="k">echo</span> <span class="s2">&quot;&lt;/p&gt;&quot;</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">function</span> <span class="nf">check_auth</span><span class="p">(</span><span class="nv">$username</span><span class="p">,</span> <span class="nv">$password</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">global</span> <span class="nv">$db</span><span class="p">;</span>
+            <span class="nv">$username</span> <span class="o">=</span> <span class="nx">mysqli_real_escape_string</span><span class="p">(</span><span class="nv">$db</span><span class="p">,</span> <span class="nv">$username</span><span class="p">);</span> <span class="c1">// prevent SQL injection</span>
+            <span class="nv">$password</span> <span class="o">=</span> <span class="nb">md5</span><span class="p">(</span><span class="nb">md5</span><span class="p">(</span><span class="nv">$password</span><span class="p">,</span> <span class="k">true</span><span class="p">),</span> <span class="k">true</span><span class="p">);</span>
+            <span class="nv">$res</span> <span class="o">=</span> <span class="nx">mysqli_query</span><span class="p">(</span><span class="nv">$db</span><span class="p">,</span> <span class="s2">&quot;SELECT * FROM users WHERE username = &#39;</span><span class="si">$username</span><span class="s2">&#39; AND password = &#39;</span><span class="si">$password</span><span class="s2">&#39;&quot;</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$res</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="na">fetch_object</span><span class="p">())</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="nx">check_auth</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="k">include_once</span> <span class="s2">&quot;flag.php&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nx">list_users</span><span class="p">();</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;src&#39;</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="nb">highlight_file</span><span class="p">(</span><span class="no">__FILE__</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="c1">// with &lt;3 from @gehaxelt</span>
+    <span class="cp">?&gt;</span>
+</pre></div>
+</div>
+<p>很难搞，一次 md5的利用 ffifdyop 可以绕过，但是两次 md5 怎么办呢？能不能找到这样一个字符串，两次md5后的效果和 ffifdyop 一次 md5 一样呢？</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tamu.html" class="btn btn-neutral float-left" title="TAMUctf 2023" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, MirRoR4s.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

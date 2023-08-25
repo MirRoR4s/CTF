@@ -1,0 +1,371 @@
+ID 	Name 	Category 	Value 	Type 	State 
+ 
+1	MailService	PWNABLE	975
+ 
+2	pwn01	PWNABLE	936
+ 
+3	Welcome	MISC	100
+ 
+4	NewYearBot	WEB	100
+ 
+5	DB	PWNABLE	1000
+ 
+6	GIFT	WEB	831
+ 
+7	Laravel Magic.	WEB	999
+ 
+8	Image Services Viewer	WEB	711
+ 
+9	Admin Lairay Old School	WEB	996
+ 
+10	TetShop	MISC	991
+ 
+11	Game	PWNABLE	999
+ 
+12	casino	CRYPTO	100
+ 
+13	casino2	CRYPTO	919
+ 
+14	enhancement	CRYPTO	964
+ 
+15	shuffle128	CRYPTO	471
+ 
+16	shuffle64	CRYPTO	775
+ 
+18	toy	CRYPTO	951
+ 
+19	TetCTFToken	WEB	996
+
+===============================================
+
+MailService
+
+[Download setup here!](https://drive.google.com/file/d/1TII13qB0DORY0euis7Gp_zLlSFdPISe-/view?usp=share_link)</br>
+Pls RCE for flag. Flag in the server are not named flag.<br>
+Pls setup docker local for debug.<br>
+nc 139.162.36.205 1337</br>
+nc 139.162.36.205 11337</br>
+Author: [@chung96vn](https://twitter.com/chung96vn)
+
+===============================================
+
+pwn01
+
+[Download binary here!](https://drive.google.com/file/d/1EQsGnABmNdTYpZU8v8GO7oFSJfSoKFLv/view?usp=share_link)</br>
+nc 139.162.36.205 31337</br>
+Author: [phieulang](https://twitter.com/hoanglh93)
+
+===============================================
+Welcome
+
+
+**Welcome to TetCTF 2023!** 
+
+Please take a look at our [Contributors and Sponsors](https://ctf.hackemall.live/kudos), without them this CTF wouldn't be possible. 
+
+You can find the flag inside that page! Thanks and Happy New Year!'
+
+
+
+===============================================
+
+
+NewYearBot
+
+**Description**
+<br>New Year New Code! My friend decide to learn code in new year, here his very first website: 
+http://172.105.120.180:9999/
+
+**File**
+<br>He said it is very secure because he is very strict on what user can input, can you check?  
+https://drive.google.com/file/d/1tU18ePUAHHYpxJ9QhdVKBpuBm_eXy--r/view?usp=sharing
+
+**Note**
+<br> Don't generate excessive load. Scanning/Dirbust is not needed.'
+
+**Author**
+<br>@tsug0d
+
+===============================================
+
+DB
+
+**Chall name:**
+* DB
+   
+**Category:**
+* Pwnable
+
+**Author:**
+* Peter Nguyen
+
+**Description:**
+* "I have implemented my own heap allocator called libzone to prevent glibc house of malloc. Do you want to try to exploit this ? :))"
+
+* Server: `nc 139.177.186.92 31339`
+
+**Material:**
+* [Binary](https://drive.google.com/file/d/1oKaxEzJXo7V44PIRKgfKVRZX1cLAjZhm/view?usp=sharing)
+
+* [libzone.so](https://drive.google.com/file/d/1947cxf8lPS_dBPuPB9GcjZGygkDiPiIb/view?usp=sharing)
+* [libzone-src-code](https://github.com/peternguyen93/libzone)
+
+**Passwd Extract:**
+* `ca218489dd6a6291cfb33e0d8196b45e`
+
+===============================================
+
+GIFT
+
+**Chall name:**
+* GIFT
+   
+**Category:**
+* Web
+
+**Author:**
+* n3mo
+
+**Description:**
+* Did you have a difficult year? here is free point for you in the new year.
+* PS: Dont automatic scan, I have give you everything you need.
+
+* Server: `http://172.105.127.104`
+
+**Material:**
+* [File](https://drive.google.com/file/d/1xWjXqFleR2HKynXO3JH5pDYfhPPhbvZ-/view?usp=sharing)
+
+===============================================
+
+
+Laravel Magic.
+
+
+**Chall name:**
+* Laravel Magic.
+   
+**Category:**
+* Web
+
+**Author:**
+* jangtrachdan
+
+**Description:**
+* A simple Laravel application. Can you pwn it? xD. Flag in: /flag
+
+* Server: `http://172.104.176.221:1234`
+
+
+
+
+===============================================
+
+Image Services Viewer
+
+**Chall name:**
+* Image Services Viewer
+   
+**Category:**
+* Web
+
+**Author:**
+* tuo4n8
+
+**Description:**
+* Do you know secret which on my server!!!!
+
+* Server: `http://139.162.15.7:2023`
+
+**Material:**
+* [Binary](https://drive.google.com/file/d/1K8XJXrdwEgJWGwu2V3cqLiZUo4nrdweM/view?usp=share_link)
+* Note: The binary provided for `Image Services Viewer`  and  `Admin Lairay Old School` challenges are the same.
+
+===============================================
+
+Admin Lairay Old School
+
+**Chall name:**
+* Admin Lairay Old School
+   
+**Category:**
+* Web
+
+**Author:**
+* tuo4n8
+
+**Description:**
+* Can you touch to me ?
+
+* Server: `http://139.162.15.7:2023`
+
+**Material:**
+* [Binary](https://drive.google.com/file/d/1K8XJXrdwEgJWGwu2V3cqLiZUo4nrdweM/view?usp=share_link)
+* Note: The binary provided for `Image Services Viewer`  and  `Admin Lairay Old School` challenges are the same.
+
+
+
+===============================================
+
+TetShop
+
+**Chall name:**
+* TetShop
+   
+**Category:**
+* Misc / Mobile Application
+
+**Author:**
+* salonpas
+
+**Description:**
+* Tết company has just recruited a new developer to replace the old employee who has just been laid off. The product is finished but the company does not have a pentester to test the product. Let's check it out!'
+
+**Material:**
+* [Binary](https://drive.google.com/file/d/1W42v_wCXHG9wSLM7jkRf5do9WUBQEKCs/view?usp=sharing)
+
+**Passwd Extract:**
+* `8d8059056786ef8ef14107603134abf7`
+
+
+
+===============================================
+
+Game
+
+**Description**
+<br>I wrote a Metamod plugin to retrieve the classname of any entities on a running Sven Co-Op game server. I have installed it on my server, but something unexpected happen and I haven't got the time to test my plugin yet. Can you test it for me?'
+
+**Container spawner**
+<br>http://game.hackemall.live:5000/
+
+**Game client (if you need it)** <br>https://store.steampowered.com/app/225840/Sven_Coop/
+
+**Note**
+<br>You should research on how Metamod and Metamod plugin works, what is an "entity" in GoldSrc engine (Source Engine uses the same concept, so can refer to), what are the data structures that an entity has, the GoldSrc network protocol, etc...
+
+**File** <br>https://drive.google.com/file/d/1ONe7x2IFUkye7nkxgdP6tqZEob-nr88R/view?usp=share_link
+
+**Author**
+<br>[nyancat0131](https://twitter.com/bienpnn)
+
+
+===============================================
+
+casino
+
+**Description**
+<br>Not really crypto...
+
+**Service**
+<br>192.53.115.129:31338
+
+**File**
+<br>https://drive.google.com/file/d/1UfeHQzvoRhCN1nVMokdviybhc7jozPcN/view?usp=share_link
+
+**Author**
+<br>@ndh
+
+===============================================
+
+casino2
+
+
+**Description**
+<br>Definitely crypto!
+
+**Service**
+<br>192.53.115.129:31339
+
+**File**
+<br>https://drive.google.com/file/d/1-QhWD12VQ4bfSVLLDCuzzs4sqx8FOvQG/view?usp=share_link
+
+**Author**
+<br>@ndh
+
+===============================================
+
+enhancement
+
+
+**Description**
+<br>Here's an idea to improve ECDSA security.'
+
+**Service**
+<br>192.53.115.129:31340
+
+**File**
+<br>https://drive.google.com/file/d/166C32vw3YNwdsjrxNDYIpa_ZzIDsI3x0/view?usp=share_link
+
+**Author**
+<br>@ndh
+
+===============================================
+
+shuffle128
+
+
+**Description**
+<br>A weak version of RC4.
+
+**File**
+<br>https://drive.google.com/file/d/1fRIQeOs8KeniRaH1vVANQUxCoBpAwxqv/view?usp=share_link
+
+**Author**
+<br>@ndh
+
+===============================================
+
+shuffle64
+
+**Description**
+<br>Even weaker!
+
+**File**
+<br>https://drive.google.com/file/d/1RHZwBGIVY53R8uLCbPboKltomnH0nhFG/view?usp=share_link
+
+**Author**
+<br>@ndh
+
+===============================================
+
+toy
+
+**Description**
+<br>Yet another amateur cryptosystem.
+
+**Service**
+<br>192.53.115.129:31337
+
+**File**
+<br>https://drive.google.com/file/d/1mjVVS36fk6aH_1-thE9p84WcAlKqSadp/view?usp=share_link
+
+**Author**
+<br>@ndh
+
+
+===============================================
+
+TetCTFToken
+
+**Chall name:**
+* TetCTFToken
+   
+**Category:**
+* Web (ft) BlockChain
+
+**Author:**
+* DucNT (ft) KhangHH
+
+**Description:**
+* So, this year, we have something cool for you. We hope you will enjoy it. Happy New Year. ~Cheers,
+
+* Server: `http://172.105.114.30:31337`
+
+**Material:**
+* [Binary](https://drive.google.com/file/d/1eJXvEknmPs-v2cMlibGq61eIjfvPXq_T/view?usp=sharing)
+
+**Note:**
+* For this challenge, we have a protection mechanism for the team that already solved that chall. You don't need to do anything. ~Cheers,'
+ 
+
+ ===============================================
