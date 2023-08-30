@@ -7,10 +7,10 @@ RUN apt-get update -y && apt-get upgrade -y && apt-get install -y nginx supervis
 ENV JDK_VERSION jdk-7u80
 ENV BUILD_VERSION 03
 WORKDIR /tmp
-RUN \
-  curl -s -L -o $JDK_VERSION.tgz https://files-cdn.liferay.com/mirrors/download.oracle.com/otn-pub/java/jdk/7u80-b15/jdk-7u80-linux-x64.tar.gz && \
-  mkdir -p /opt/jdk/$JDK_VERSION && \
-  tar -zxf $JDK_VERSION.tgz -C /opt/jdk/$JDK_VERSION --strip-components 1 && \
+RUN mkdir -p /opt/jdk/$JDK_VERSION
+COPY jdk-7u80-linux-x64.tar.gz /opt/jdk/$JDK_VERSION/
+
+RUN tar -zxf $JDK_VERSION.tgz -C /opt/jdk/$JDK_VERSION --strip-components 1 && \
   rm $JDK_VERSION.tgz && \
   update-alternatives --install /usr/bin/java java /opt/jdk/$JDK_VERSION/bin/java 100 && \
   update-alternatives --install /usr/bin/javac javac /opt/jdk/$JDK_VERSION/bin/javac 100 && \

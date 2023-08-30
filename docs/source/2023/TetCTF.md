@@ -79,6 +79,8 @@ type=FL4G&number=𝔰𝔩𝔦𝔠𝔢(𝔦𝔡(𝔯𝔢)) # POST
 ~0 -> -1
 ```
 
+![image-20230825201627731](../../_static/images/image-20230825201627731.png)
+
 ### Image Services Viewer
 
 **题目描述**
@@ -89,5 +91,125 @@ Do you know secret which on my server!!!!
 
 #### 题目分析
 
+**环境搭建**
+
+- 根据readme.md的指示来，不过给的Dockerfile在下载镜像时会有网络问题，经过我的尝试似乎怎么换源都不行，建议安装v2rary翻墙。然后 adminPortal里面jdk的下载链接失效了，这里给出一个[国内的](https://blog.lupf.cn/articles/2022/02/19/1645283454543.html)，大家可以自行下载到本地然后用copy命令复制到容器里面。我最后修改成如下的样子了：
+
+  ```dockerfile
+  # 前面都一样
+  COPY ./jdk-7u80-linux-x64.tar.gz jdk-7u80.tgz
+  RUN \
+    mkdir -p /opt/jdk/$JDK_VERSION && \
+    tar -zxf $JDK_VERSION.tgz -C /opt/jdk/$JDK_VERSION --strip-components 1 && \
+    rm $JDK_VERSION.tgz && \
+    update-alternatives --install /usr/bin/java java /opt/jdk/$JDK_VERSION/bin/java 100 && \
+    update-alternatives --install /usr/bin/javac javac /opt/jdk/$JDK_VERSION/bin/javac 100 && \
+    update-alternatives --install /usr/bin/jar jar /opt/jdk/$JDK_VERSION/bin/jar 100
+  
+  
+  # 后面都一样
+  
+  ```
+
+  话不多说，开始分析题目，首先是源码目录结构如下图所示：
+
+![image-20230825202427356](../../_static/images/image-20230825202427356.png)
+
+三个目录以及docker的yaml还有两个启动脚本，官方说了有两个题是同一个附件，分别有两个flag。根据现在的题目名明显我们需要关注 images-services 这个目录。
+
+首先观察一下该目录的 dockerfile，因为这能让我了解题目的基本业务逻辑。
+
+```dockerfile
+COPY ./container/images-services/flag.txt /usr/src/app/fl4gg_tetCTF
+
+EXPOSE 3000
+
+CMD [ "node", "index.js" ]
+```
+
+flag在容器当前工作目录下的fl4gg_tetCTF，入口文件是 index.js。那现在就去看一下这个文件。看完这个文件后，感觉有问题的点在于：
+
+![image-20230825205649854](../../_static/images/image-20230825205649854.png)
+
+此处题目已经暗示我们url和flag有关系了，又是host、又是url的，很容易让人想起SSRF，我的首要想法是通过SSRF读取服务端本地的flag。但是还是要看看downloadImage()函数做了什么。
+
+![image-20230825205856905](../../_static/images/image-20230825205856905.png)
+
+以我们传入的url为参数执行命令
+
+```python
+python bot.py url
+```
+
+现在跟进去看看bot.py，注释告诉我们这是一个处理本地请求的文件，可以接受 file:// 这样的url。看到这里很自然的想法就是利用 fie 协议读取 flag。然而，题目利用了好几个函数对请求进行了过滤的，所以必须观察利用file协议读flag会不会触发过滤函数。
+
+- `isAdmin()` 要求password=Th!sIsS3xreT0但是长度又不能超过12，将password改成数组传入即可。
+
+```
+password[]=Th!sIsS3xreT0
+```
 
 
+
+- `valite()`要求请求体的值的类型必须是String或Number，同时值不可以包含一些黑名单字符，看了一眼没有file://以及和flag路径相关的，非常nice！
+
+- `IsValidProtocol()` 结合源码要求url只能是http或者https。很难搞，似乎无法用fie协议了？
+- `isValidHost()`限制host必须是i.ibb.co
+- bot.py请求的时候要求后缀名是图片、响应的Content-Type是image，第一个我想到的是在路径后拼接`#.jpg`绕过，第二个除非我有可控的服务器并且host还是i.ibb.co才能做到。
+
+最关键的点在于如何绕过host的限制？目标当然是将 host 弄成一个我们可控的服务器。这里可以利用 node 和 python 对 host 的解析差异来绕过。
+
+在bot.py中会调用requests的head和get方法，在调用过程中会调用到urllib3的Url类的parse_url方法，该方法对于url的解析和题目urlParse类对url的解析存在差异。
+
+![image-20230826212134778](../../_static/images/image-20230826212134778.png)
+
+![image-20230826212158735](../../_static/images/image-20230826212158735.png)
+
+![image-20230826212221336](../../_static/images/image-20230826212221336.png)
+
+如上图，authority不匹配反斜杠，path除了问号和井号都匹配。所以对于 `http://evil.com1232\@i.ibb.co/1.png`
+
+，requests解析的authority是`http://evil.com1232`，path是`\@i.ibb.co/1.png`。
+
+![image-20230826212743900](../../_static/images/image-20230826212743900.png)
+
+对于urlParse来说，其解析出来的结果是
+
+![image-20230826213023403](../../_static/images/image-20230826213023403.png)
+
+关于url的具体组成，可以参看[维基百科](https://en.wikipedia.org/wiki/URL)的图：
+
+![URI syntax diagram](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/URI_syntax_diagram.svg/1068px-URI_syntax_diagram.svg.png)
+
+```
+URI = scheme ":" ["//" authority] path ["?" query] ["#" fragment]
+authority = [userinfo "@"] host [":" port]
+```
+
+利用这种解析差异，将host弄成我们可控的服务器，然后在服务器上定义302跳转读取本地的flag，这就完成了一次优雅的ssrf。
+
+```
+http://ip\@i.ibb.cotest/test.jpg
+```
+
+### admin Portal
+
+**题目描述**
+
+#### 题目分析
+
+这个题相当有难度，基本都是我没学过、却常听过的，比如json反序列化、前台rce等。
+
+liferay是什么？参看[百度](https://baike.baidu.com/item/Liferay/4951467)，应该就是一个基于java的cms，另外其前台是利用struts框架写的，感觉有点太老了？
+
+目前的思路是先学习一下[CVE-2020-7961 Liferay Portal 反序列化RCE分析 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/7499#toc-5)
+
+[CVE-2020-7961 Liferay Portal 复现分析 - tr1ple - 博客园 (cnblogs.com)](https://www.cnblogs.com/tr1ple/p/12608731.html)
+
+
+
+环境搭建的话vulhub可以，具体看一下[这个](https://github.com/Threekiii/Vulhub-Reproduce/blob/master/Liferay%20Portal%20CE%20%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%20CVE-2020-7961.md)。
+
+## 参考
+
+[TetCTF2023&Liferay(CVE-2019-16891)(Pre-Auth RCE) | Y4tacker's Blog](https://y4tacker.github.io/2023/01/03/year/2023/1/TetCTF2023-Liferay-CVE-2019-16891-Pre-Auth-RCE/#Part1)
