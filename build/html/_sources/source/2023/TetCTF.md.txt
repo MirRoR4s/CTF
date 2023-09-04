@@ -91,34 +91,27 @@ Do you know secret which on my server!!!!
 
 #### 题目分析
 
-给的Dockerfile在下载镜像时会有网络问题，建议更换apt和npm的源。apt的可以用清华，npm的可以换淘宝的。
+**环境搭建**
 
-以下是gpt给出的解决方案：
+- 根据readme.md的指示来，不过给的Dockerfile在下载镜像时会有网络问题，经过我的尝试似乎怎么换源都不行，建议安装v2rary翻墙。然后 adminPortal里面jdk的下载链接失效了，这里给出一个[国内的](https://blog.lupf.cn/articles/2022/02/19/1645283454543.html)，大家可以自行下载到本地然后用copy命令复制到容器里面。我最后修改成如下的样子了：
 
-```dockerfile
-FROM node:14
+  ```dockerfile
+  # 前面都一样
+  COPY ./jdk-7u80-linux-x64.tar.gz jdk-7u80.tgz
+  RUN \
+    mkdir -p /opt/jdk/$JDK_VERSION && \
+    tar -zxf $JDK_VERSION.tgz -C /opt/jdk/$JDK_VERSION --strip-components 1 && \
+    rm $JDK_VERSION.tgz && \
+    update-alternatives --install /usr/bin/java java /opt/jdk/$JDK_VERSION/bin/java 100 && \
+    update-alternatives --install /usr/bin/javac javac /opt/jdk/$JDK_VERSION/bin/javac 100 && \
+    update-alternatives --install /usr/bin/jar jar /opt/jdk/$JDK_VERSION/bin/jar 100
+  
+  
+  # 后面都一样
+  
+  ```
 
-RUN mkdir -p /usr/src/app
-
-RUN sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list \
-    && sed -i 's/security.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list \
-    && apt-get update -y \
-    && apt-get install -y python python-pip
-
-WORKDIR /usr/src/app
-
-COPY ./container/images-services/src/ .
-
-RUN npm config set registry https://registry.npm.taobao.org
-RUN npm install
-RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple requests
-
-COPY ./container/images-services/flag.txt /usr/src/app/fl4gg_tetCTF
-
-EXPOSE 3000
-
-CMD [ "node", "index.js" ]
-```
+  话不多说，开始分析题目，首先是源码目录结构如下图所示：
 
 ![image-20230825202427356](../../_static/images/image-20230825202427356.png)
 
@@ -126,7 +119,7 @@ CMD [ "node", "index.js" ]
 
 首先观察一下该目录的 dockerfile，因为这能让我了解题目的基本业务逻辑。
 
-```dockfile
+```dockerfile
 COPY ./container/images-services/flag.txt /usr/src/app/fl4gg_tetCTF
 
 EXPOSE 3000
@@ -196,7 +189,7 @@ authority = [userinfo "@"] host [":" port]
 利用这种解析差异，将host弄成我们可控的服务器，然后在服务器上定义302跳转读取本地的flag，这就完成了一次优雅的ssrf。
 
 ```
-http://47.115.222.18\@i.ibb.cotest/test.jpg
+http://ip\@i.ibb.cotest/test.jpg
 ```
 
 ### admin Portal
@@ -205,7 +198,17 @@ http://47.115.222.18\@i.ibb.cotest/test.jpg
 
 #### 题目分析
 
+这个题相当有难度，基本都是我没学过、却常听过的，比如json反序列化、前台rce等。
 
+liferay是什么？参看[百度](https://baike.baidu.com/item/Liferay/4951467)，应该就是一个基于java的cms，另外其前台是利用struts框架写的，感觉有点太老了？
+
+目前的思路是先学习一下[CVE-2020-7961 Liferay Portal 反序列化RCE分析 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/7499#toc-5)
+
+[CVE-2020-7961 Liferay Portal 复现分析 - tr1ple - 博客园 (cnblogs.com)](https://www.cnblogs.com/tr1ple/p/12608731.html)
+
+
+
+环境搭建的话vulhub可以，具体看一下[这个](https://github.com/Threekiii/Vulhub-Reproduce/blob/master/Liferay%20Portal%20CE%20%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%20CVE-2020-7961.md)。
 
 ## 参考
 
