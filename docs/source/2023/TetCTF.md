@@ -28,9 +28,7 @@ Don't generate excessive load. Scanning/Dirbust is not needed.
 
 ![image-20230825065628741](../../_static/images/image-20230825065628741.png)
 
-对于传入的type仅做了一个变量名是否合法的校验，这里或许可能执行任意的函数，而非是题目期望的问候语列表。
-
-flag是在FL4G这个变量里面，所以很自然的想法就是显示该变量的内容。如果传入的type为FL4G，那么肯定希望number是对应的下标索引。但是number有一个botValidator函数过滤，该函数限制了number各个字符的ascii值不可以在57-123之内，并且数字部分总长度不可以超过最长的问候语列表的长度。（最大长度是 6）那么我们传入的 number 必须小于等于 5 。所以如何截取剩余的flag字符呢？我看到的有两种手法：
+如上图，最后一行根据用户传入的 type 和 number 为参数调用了 `eval()` 函数，这可能导致 RCE。据开头的代码可以知道，flag 在 `FL4G` 这个变量里面，所以正常的想法是通过 eval 函数显示 `FL4G` 的内容获取 flag。如果 type=FL4G，number 是一个大于等于 FL4G 长度的整数，就可以完整地显示出 `FL4G` 的内容来。但是题目调用 `botValidator()` 对 number 进行了过滤，该函数限制了number 各个字符的 ascii 值不可以在 57-123 之间，并且数字部分的总长不可以超过最长的问候语列表的长度（最大长度是 6 ）。这意味着在正常的情况下我们只能看到部分 `FL4G` 的内容，所以该如何绕过这一限制？我看到的有两种手法：
 
 **slice切片结合同型字符**
 
