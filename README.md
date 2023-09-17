@@ -10,3 +10,4 @@
 
 ## 环境搭建
 采用 kali linux 作为镜像机，并且挂了代理。
+- 软件源使用的是[清华大学](https://mirrors.tuna.tsinghua.edu.cn/help/kali/)的
