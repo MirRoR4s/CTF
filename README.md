@@ -15,4 +15,6 @@
 - 很多时候拉取镜像的时候要求身份认证的，所以一定要docker login登录一下。
 3. 安装docker，参看[菜鸟教程](http://www.runoob.com/docker/ubuntu-docker-install.html)
 
+4. 解决普通用户docker ps、images 等权限否认问题：https://blog.csdn.net/qq_21139827/article/details/127607011?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-127607011-blog-119377535.235%5Ev38%5Epc_relevant_sort_base3&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-127607011-blog-119377535.235%5Ev38%5Epc_relevant_sort_base3&utm_relevant_index=1
+
 - 软件源使用的是[清华大学](https://mirrors.tuna.tsinghua.edu.cn/help/kali/)的
